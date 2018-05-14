@@ -61,7 +61,7 @@ def generate_splits():
         print validation_qids.intersection(test_qids)
 
         for qid_set, set_name in [(training_qids, "training"), (validation_qids, "validation"), (test_qids, "test")]:
-            with open(cin("splits/{}/{}/{}_qids".format(split_identifier, split.name, set_name)), 'wb+') as fp:
+            with open(cin("splits/{}/{}/{}_qids.pkl".format(split_identifier, split.name, set_name)), 'wb+') as fp:
                 pickle.dump(qid_set, fp)
 
 

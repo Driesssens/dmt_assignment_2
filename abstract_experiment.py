@@ -97,7 +97,7 @@ class AbstractExperiment:
 
             for set_name in ["training", "validation", "test"]:
                 print "Generating the {} set...".format(set_name)
-                with open('splits/{}/{}/{}_qids'.format(self.split_identifier, experiment_size, set_name), 'rb') as fp:
+                with open('splits/{}/{}/{}_qids.pkl'.format(self.split_identifier, experiment_size, set_name), 'rb') as fp:
                     qids = pickle.load(fp)
 
                 sample_rows = full_training_set[full_training_set.srch_id.isin(qids)]

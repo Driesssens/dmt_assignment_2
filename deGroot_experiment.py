@@ -8,7 +8,7 @@ class BaseExperiment(AbstractExperiment):
     experiment_name = "BaseExperiment"
     experiment_description = """The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
 
-    ignored_features = ['date_time']
+    ignored_features = ['date_time'] # ,'random_bool']
 
     def missing_value_default(self, feature_name, feature_value):
     	if feature_name == 'visitor_hist_starrating':
@@ -17,7 +17,9 @@ class BaseExperiment(AbstractExperiment):
         	return '0.000000'
 
     def feature_engineering(self, raw_data_frame):
-    	print(raw_data_frame.size)
+
+
+
         return raw_data_frame
 
 

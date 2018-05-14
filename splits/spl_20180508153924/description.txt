@@ -1,5 +1,0 @@
-Description of split spl_20180508153924
-mini set: training 1000 qids, validation 1000 qids, test 1000 qids
-development set: training 10000 qids, validation 10000 qids, test 10000 qids
-medium set: training 50000 qids, validation 10000 qids, test 50000 qids
-full set: training 70 %, validation 10 %, test 20 %

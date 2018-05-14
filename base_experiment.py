@@ -3,7 +3,7 @@ from configuration import make_configuration
 
 
 class BaseExperiment(AbstractExperiment):
-    split_identifier = "spl_20180508153924"
+    split_identifier = "spl_20180511180820"
 
     experiment_name = "BaseExperiment"
     experiment_description = """The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
@@ -20,4 +20,4 @@ class BaseExperiment(AbstractExperiment):
 BaseExperiment().run_mini_experiment()
 
 short_experiment = make_configuration(epochs=10)
-BaseExperiment().run_development_experiment(configuration=short_experiment)
+BaseExperiment().run_development_experiment(configuration=short_experiment, reset_data=True)
