@@ -11,7 +11,7 @@ import numpy
 
 
 class BaseExperiment(AbstractExperiment):
-    split_identifier = "spl_20180516092856"
+    split_identifier = "spl_20180517193749"
 
     experiment_name = "deGrootExperiment"
     experiment_description = """The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
@@ -22,24 +22,24 @@ class BaseExperiment(AbstractExperiment):
     def missing_value_default(self, feature_name, feature_value):
 
         if feature_name == 'visitor_hist_starrating':
-            return '3.374334'
+            return self.median_frame[feature_name]
 
         if feature_name == 'visitor_hist_adr_usd':
-            return '0.000000'
+            return self.median_frame[feature_name]
 
         if feature_name == 'prop_review_score':
-            return '0.000000'
+            return '3.000000'
 
         if feature_name == 'prop_location_score2':
-            return '0.000000'
+            return self.median_frame[feature_name]
             
 
         if feature_name == 'srch_query_affinity_score':
-            return '-24.14641'
+            return self.median_frame[feature_name]
 
 
         if feature_name == 'orig_destination_distance':
-            return '0.000000'
+            return self.median_frame[feature_name]
 
         else:
             return '0.000000'
@@ -75,6 +75,8 @@ class BaseExperiment(AbstractExperiment):
             raw_data_frame.loc[:,'count_available'] += numpy.where(raw_data_frame['comp'+str(elem)+'_inv'] == 1, 1, 0)
             raw_data_frame = raw_data_frame.drop(labels=['comp'+str(elem)+'_rate', 'comp'+str(elem)+'_inv', 'comp'+str(elem)+'_rate_percent_diff'], axis=1)
 
+
+        self.median_frame = raw_data_frame.median()
 
         return raw_data_frame
 

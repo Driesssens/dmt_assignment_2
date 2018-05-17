@@ -3,7 +3,7 @@ from configuration import make_configuration
 
 
 class BaseExperiment(AbstractExperiment):
-    split_identifier = "spl_20180516092856"
+    split_identifier = "spl_20180517193749"
 
     experiment_name = "BaseExperiment"
     experiment_description = """The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
