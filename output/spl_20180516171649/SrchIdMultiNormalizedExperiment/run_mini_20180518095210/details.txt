@@ -1,0 +1,7 @@
+Details of run run_mini_20180518095210 of SrchIdMultiNormalizedExperiment on the mini set.
+About SrchIdMultiNormalizedExperiment: Here, some of the attributes also get a version that is normalized within the group of rows of the same srch_id, meaning that for all hotels within that group, for a given attribute, it gets an additional feature that is divided by the standard variation after the mean is subtracted. The normalized attributes are: ['prop_starrating', 'prop_review_score', 'prop_location_score1', 'prop_location_score2', 'price_usd', 'orig_destination_distance']
+Used split: spl_20180516171649
+Result: nDCG 0.464802093824 on test set after 75 epochs.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

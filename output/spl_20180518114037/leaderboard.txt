@@ -1,0 +1,11 @@
+development
+   [1]. 0.497490 SrchIdStandardizedExperiment run_development_20180518125746
+   [2]. 0.497145 SrchIdNormalizedExperiment   run_development_20180518132752
+   [3]. 0.495035 BaseExperiment               run_development_20180518123354
+
+mini
+   [1]. 0.477586 SrchIdNormalizedExperiment   run_mini_20180518120316
+   [2]. 0.476263 SrchIdStandardizedExperiment run_mini_20180518115929
+   [3]. 0.471657 BaseExperiment               run_mini_20180518115627
+   [4]. 0.471657 BaseExperiment               run_mini_20180518122342
+

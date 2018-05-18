@@ -1,0 +1,32 @@
+development
+   [1]. 0.499641 SrchIdMultiStandardizedExperiment                     run_development_20180517150252
+   [2]. 0.498655 SrchIdMultiNormalizedExperiment                       run_development_20180517143727
+   [3]. 0.495015 BaseExperiment                                        run_development_20180517142230
+   [4]. 0.494649 SrchIdNormalizedExperiment                            run_development_20180517145148
+   [5]. 0.177679 SrchIdMultiStandardizedAllGroupsExceptMonthExperiment run_development_20180517160834
+
+mini
+   [1]. 0.468444 SrchIdNormalizedExperiment                            run_mini_20180517141502
+   [2]. 0.468444 SrchIdNormalizedExperiment                            run_mini_20180517171500
+   [3]. 0.468444 SrchIdNormalizedExperiment                            run_mini_20180517173023
+   [4]. 0.468444 SrchIdNormalizedExperiment                            run_mini_20180517174655
+   [5]. 0.466612 SrchIdMultiStandardizedExperiment                     run_mini_20180517141654
+   [6]. 0.464802 SrchIdMultiNormalizedExperiment                       run_mini_20180517141418
+   [7]. 0.464802 SrchIdMultiNormalizedExperiment                       run_mini_20180518095210
+   [8]. 0.460285 BaseExperiment                                        run_mini_20180517141330
+   [9]. 0.460285 BaseExperiment                                        run_mini_20180518105914
+   [10]. 0.460285 BaseExperiment                                        run_mini_20180518110649
+   [11]. 0.460285 BaseExperiment                                        run_mini_20180518110910
+   [12]. 0.353935 SrchIdMultiStandardizedAllGroupsExceptMonthExperiment run_mini_20180517155907
+   [13]. 0.353935 SrchIdMultiStandardizedAllGroupsExceptMonthExperiment run_mini_20180517235356
+
+medium
+   [1]. 0.505892 SrchIdMultiNormalizedExperiment                       run_medium_20180518100909
+   [2]. 0.504700 SrchIdMultiStandardizedExperiment                     run_medium_20180518001044
+   [3]. 0.502551 BaseExperiment                                        run_medium_20180517165517
+   [4]. 0.093914 SrchIdMultiStandardizedAllGroupsExceptMonthExperiment run_medium_20180518014552
+
+full
+   [1]. 0.508336 SrchIdMultiStandardizedExperiment                     run_full_20180518041924
+   [2]. 0.504727 BaseExperiment                                        run_full_20180517182423
+

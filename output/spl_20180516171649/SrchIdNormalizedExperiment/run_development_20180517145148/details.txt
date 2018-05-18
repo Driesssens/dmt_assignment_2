@@ -1,0 +1,7 @@
+Details of run run_development_20180517145148 of SrchIdNormalizedExperiment on the development set.
+About SrchIdNormalizedExperiment: Here, some of the attributes also get a version that is normalized within the srch_id, meaning that for all hotels with that srch_id, for a given attribute, the hotel with the highest value for that attribute gets an additional feature with value 1, the lowest a new feature with value 0, and the others in between. The attributes are: ['price_usd', 'prop_starrating']
+Used split: spl_20180516171649
+Result: nDCG 0.494649019249 on test set after 112 epochs.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

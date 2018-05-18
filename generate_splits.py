@@ -8,9 +8,9 @@ import os
 Split = namedtuple('Split', 'name unit training validation test')
 
 SPLITS = [
-    Split('mini', 'qids', 1000, 1000, 1000),
-    Split('development', 'qids', 10000, 10000, 10000),
-    Split('medium', 'qids', 50000, 10000, 50000),
+    Split('mini', 'qids', 1000, 1000, 5000),
+    Split('development', 'qids', 10000, 10000, 39960),
+    Split('medium', 'qids', 50000, 10000, 39960),
     Split('full', '%', 70, 10, 20)
 ]
 
@@ -61,7 +61,7 @@ def generate_splits():
         print validation_qids.intersection(test_qids)
 
         for qid_set, set_name in [(training_qids, "training"), (validation_qids, "validation"), (test_qids, "test")]:
-            with open(cin("splits/{}/{}/{}_qids".format(split_identifier, split.name, set_name)), 'wb+') as fp:
+            with open(cin("splits/{}/{}/{}_qids.pkl".format(split_identifier, split.name, set_name)), 'wb+') as fp:
                 pickle.dump(qid_set, fp)
 
 

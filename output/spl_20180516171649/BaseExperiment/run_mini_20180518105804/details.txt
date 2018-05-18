@@ -1,0 +1,1 @@
+Details of run run_mini_20180518105804 of BaseExperiment on the mini set.

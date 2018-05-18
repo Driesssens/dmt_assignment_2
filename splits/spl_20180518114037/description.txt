@@ -1,0 +1,21 @@
+Description of split spl_20180518114037
+mini set: training 1000 qids, validation 1000 qids, test 5000 qids
+development set: training 10000 qids, validation 10000 qids, test 39960 qids
+medium set: training 50000 qids, validation 10000 qids, test 39960 qids
+full set: training 70 %, validation 10 %, test 20 %
+
+qids in mini/training:              1000    (14%)
+qids in mini/validation:            1000    (14%)
+qids in mini/test:                  5000    (71%)
+
+qids in development/training:       10000   (16%)
+qids in development/validation:     10000   (16%)
+qids in development/test:           39960   (66%)
+
+qids in medium/training:            50000   (50%)
+qids in medium/validation:          10000   (10%)
+qids in medium/test:                39960   (40%)
+
+qids in full/training:              139856  (70%)
+qids in full/validation:            19979   (10%)
+qids in full/test:                  39960   (20%)
