@@ -1,0 +1,9 @@
+Details of run run_medium_20180518205133 of UserHistoryNormalizedExperiment on the medium set.
+Experiment took 86.7796 minutes.
+About UserHistoryNormalizedExperiment: Adds as new features |prop_starrating - visitor_hist_starrating|, same for price_usd. Intuition: higher values for these features means the booking deviates from the visitor's usual taste. Is 0 when there is no visitor history (reflecting the idea that in that case, all hotels in the srch_id should be fine). In addition, also normalizes features: these new ones, as well as the ones that SrchIdNormalizedExperiment also normalizes.
+Used split: spl_20180518114037
+Result: nDCG 0.502270595624 on test set after 297 epochs.
+Result: nDCG 0.503717384802 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

@@ -1,0 +1,9 @@
+Details of run run_mini_20180518165853 of UserHistoryExperiment on the mini set.
+Experiment took 2.79346666667 minutes.
+About UserHistoryExperiment: Adds as new features |prop_starrating - visitor_hist_starrating|, same for price_usd. Intuition: higher values for these features means the booking deviates from the visitor's usual taste. Is 0 when there is no visitor history (reflecting the idea that in that case, all hotels in the srch_id should be fine).
+Used split: spl_20180518114037
+Result: nDCG 0.471657461082 on test set after 128 epochs.
+Result: nDCG 0.490120437334 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

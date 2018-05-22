@@ -1,9 +1,9 @@
-Details of run run_mini_20180518122342 of BaseExperiment on the mini set.
-Experiment took 1.1245 minutes.
+Details of run run_full_20180518220530 of BaseExperiment on the full set.
+Experiment took 317.308683333 minutes.
 About BaseExperiment: The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
 Used split: spl_20180518114037
-Result: nDCG 0.471657461082 on test set after 128 epochs.
-Result: nDCG 0.490120437334 on validation set.
+Result: nDCG 0.504044283203 on test set after 625 epochs.
+Result: nDCG 0.506312563405 on validation set.
 
 Configuration (hyperparameters):
 {'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}
