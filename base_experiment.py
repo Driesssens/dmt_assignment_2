@@ -1,5 +1,4 @@
 from abstract_experiment import AbstractExperiment
-from configuration import make_configuration
 
 
 class BaseExperiment(AbstractExperiment):
@@ -12,6 +11,3 @@ class BaseExperiment(AbstractExperiment):
 
     def feature_engineering(self, raw_data_frame):
         return raw_data_frame
-
-
-BaseExperiment().run_mini_experiment()

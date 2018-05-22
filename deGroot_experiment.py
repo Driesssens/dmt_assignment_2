@@ -6,10 +6,10 @@ import numpy
 
 
 class DeGrootExperiment(AbstractExperiment):
-    split_identifier = "spl_20180516092856"
+    split_identifier = "spl_20180518114037"
 
-    experiment_name = "deGrootExperiment"
-    experiment_description = """The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
+    experiment_name = "deGrootonlymissingExperiment"
+    experiment_description = """Basic experiment only adding in some features for the missing values."""
 
     ignored_features = ['date_time']
 
@@ -68,10 +68,9 @@ class DeGrootExperiment(AbstractExperiment):
         return raw_data_frame
 
 
-# removing file for generating new data
-try:
-    shutil.rmtree('D:/Users/Thomas/Documents/GitHub/dmt_assignment_2/data/spl_20180516092856/deGrootExperiment/medium')
-except:
-    pass
 
-DeGrootExperiment().run_medium_experiment(reset_data=True)
+DeGrootExperiment().run_mini_experiment(reset_data=False)
+DeGrootExperiment().run_development_experiment(reset_data=False)
+DeGrootExperiment().run_medium_experiment(reset_data=False)
+DeGrootExperiment().run_full_experiment(reset_data=False)
+
