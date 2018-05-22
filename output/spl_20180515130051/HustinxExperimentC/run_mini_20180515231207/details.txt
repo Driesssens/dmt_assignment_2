@@ -1,0 +1,7 @@
+Details of run run_mini_20180515231207 of HustinxExperimentC on the mini set.
+About HustinxExperimentC: Experiment that also uses the season and daypart information. Uses 0.000 for all missing values.
+Used split: spl_20180515130051
+Result: nDCG 0.479395724893 on test set after 146 epochs.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

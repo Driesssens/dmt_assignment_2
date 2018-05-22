@@ -1,0 +1,7 @@
+Details of run run_mini_20180515130510 of BaseExperiment on the mini set.
+About BaseExperiment: The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
+Used split: spl_20180515130051
+Result: nDCG 0.477211583932 on test set after 119 epochs.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

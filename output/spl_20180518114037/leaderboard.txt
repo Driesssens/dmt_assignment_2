@@ -1,11 +1,38 @@
 development
-   [1]. 0.497490 SrchIdStandardizedExperiment run_development_20180518125746
-   [2]. 0.497145 SrchIdNormalizedExperiment   run_development_20180518132752
-   [3]. 0.495035 BaseExperiment               run_development_20180518123354
+   [1]. 0.500572 HustinxExperimentE12         run_development_20180518230823
+   [2]. 0.499612 HustinxExperimentE11         run_development_20180518220240
+   [3]. 0.498995 HustinxExperimentE7          run_development_20180518195354
+   [4]. 0.498874 HustinxExperimentE4          run_development_20180518185301
+   [5]. 0.498612 HustinxExperimentE10         run_development_20180518212335
+   [6]. 0.498568 HustinxExperimentE2          run_development_20180518181812
+   [7]. 0.498006 HustinxExperimentE9          run_development_20180518204132
+   [8]. 0.497930 HustinxExperimentE6          run_development_20180518193102
+   [9]. 0.497757 HustinxExperimentE3          run_development_20180518183403
+   [10]. 0.497490 SrchIdStandardizedExperiment run_development_20180518125746
+   [11]. 0.497448 HustinxExperimentE5          run_development_20180518191201
+   [12]. 0.497145 SrchIdNormalizedExperiment   run_development_20180518132752
+   [13]. 0.496271 HustinxExperimentE8          run_development_20180518202226
+   [14]. 0.495035 BaseExperiment               run_development_20180518123354
+   [15]. 0.494991 BaseExperiment               run_development_20180518154530
 
 mini
    [1]. 0.477586 SrchIdNormalizedExperiment   run_mini_20180518120316
    [2]. 0.476263 SrchIdStandardizedExperiment run_mini_20180518115929
    [3]. 0.471657 BaseExperiment               run_mini_20180518115627
    [4]. 0.471657 BaseExperiment               run_mini_20180518122342
+   [5]. 0.471501 BaseExperiment               run_mini_20180518151756
+   [6]. 0.471501 BaseExperiment               run_mini_20180518152706
+   [7]. 0.471359 HustinxExperimentE2          run_mini_20180518151342
+
+medium
+   [1]. 0.505941 HustinxExperimentE12 run_medium_20180518233605
+   [2]. 0.503209 BaseExperiment       run_medium_20180518170007
+
+full
+   [1]. 0.512124 HustinxExperimentE15       run_full_20180521022408
+   [2]. 0.511978 HustinxExperimentE13       run_full_20180520004242
+   [3]. 0.511834 HustinxExperimentE14       run_full_20180520122721
+   [4]. 0.510302 HustinxExperimentE12       run_full_20180519011804
+   [5]. 0.507497 SrchIdNormalizedExperiment run_full_20180521173932
+   [6]. 0.504063 BaseExperiment             run_full_20180521120423
 

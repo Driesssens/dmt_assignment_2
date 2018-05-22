@@ -1,0 +1,9 @@
+Details of run run_mini_20180518145722 of HustinxExperimentE2 on the mini set.
+Experiment took 1.9208 minutes.
+About HustinxExperimentE2: Experiment that uses the hour of the day that a search is done (note, this doesnt include time zone). Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
+Used split: spl_20180518145317
+Result: nDCG 0.473628654615 on test set after 103 epochs.
+Result: nDCG 0.481402510636 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}
