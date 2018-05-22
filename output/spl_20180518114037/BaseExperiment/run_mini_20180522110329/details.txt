@@ -1,0 +1,9 @@
+Details of run run_mini_20180522110329 of BaseExperiment on the mini set.
+Experiment took 2.32823333333 minutes.
+About BaseExperiment: The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Using ADAboost en more epochs.
+Used split: spl_20180518114037
+Result: nDCG 0.471503310526 on test set after 124 epochs.
+Result: nDCG 0.488668852518 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 200, 'use_ada_boost': True, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 2000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}
