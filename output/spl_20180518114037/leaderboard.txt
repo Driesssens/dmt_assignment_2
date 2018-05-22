@@ -2,26 +2,36 @@ development
    [1]. 0.497490 SrchIdStandardizedExperiment    run_development_20180518125746
    [2]. 0.497466 UserHistoryNormalizedExperiment run_development_20180518173332
    [3]. 0.497145 SrchIdNormalizedExperiment      run_development_20180518132752
-   [4]. 0.495604 UserHistoryExperiment           run_development_20180518170934
-   [5]. 0.495035 BaseExperiment                  run_development_20180518123354
+   [4]. 0.497130 deGrootExperiment               run_development_20180521213415
+   [5]. 0.495704 deGrootonlymissingExperiment    run_development_20180522003136
+   [6]. 0.495604 UserHistoryExperiment           run_development_20180518170934
+   [7]. 0.495035 BaseExperiment                  run_development_20180518123354
 
 mini
    [1]. 0.479167 UserHistoryNormalizedExperiment run_mini_20180518171834
-   [2]. 0.477586 SrchIdNormalizedExperiment      run_mini_20180518120316
-   [3]. 0.476263 SrchIdStandardizedExperiment    run_mini_20180518115929
-   [4]. 0.471657 BaseExperiment                  run_mini_20180518140402
-   [5]. 0.471657 UserHistoryExperiment           run_mini_20180518165853
+   [2]. 0.477989 deGrootExperiment               run_mini_20180521212843
+   [3]. 0.477586 SrchIdNormalizedExperiment      run_mini_20180518120316
+   [4]. 0.476263 SrchIdStandardizedExperiment    run_mini_20180518115929
+   [5]. 0.473033 moreleafsexperimentonbase       run_mini_20180522111554
+   [6]. 0.471657 BaseExperiment                  run_mini_20180518140402
+   [7]. 0.471657 UserHistoryExperiment           run_mini_20180518165853
+   [8]. 0.471657 BaseExperiment                  run_mini_20180518115627
+   [9]. 0.471245 deGrootonlymissingExperiment    run_mini_20180522002651
 
 medium
-   [1]. 0.504931 SrchIdStandardizedExperiment    run_medium_20180518190407
-   [2]. 0.503213 BaseExperiment                  run_medium_20180518141916
-   [3]. 0.502567 SrchIdNormalizedExperiment      run_medium_20180518174651
-   [4]. 0.502271 UserHistoryNormalizedExperiment run_medium_20180518205133
+   [1]. 0.504981 deGrootonlymissingExperiment    run_medium_20180522004417
+   [2]. 0.504931 SrchIdStandardizedExperiment    run_medium_20180518190407
+   [3]. 0.503213 BaseExperiment                  run_medium_20180518141916
+   [4]. 0.502567 SrchIdNormalizedExperiment      run_medium_20180518174651
+   [5]. 0.502566 deGrootExperiment               run_medium_20180521214943
+   [6]. 0.502271 UserHistoryNormalizedExperiment run_medium_20180518205133
 
 full
-   [1]. 0.510570 SrchIdStandardizedExperiment    run_full_20180519084816
-   [2]. 0.509364 UserHistoryNormalizedExperiment run_full_20180519173841
-   [3]. 0.507500 SrchIdNormalizedExperiment      run_full_20180519032141
-   [4]. 0.504460 UserHistoryExperiment           run_full_20180520004935
-   [5]. 0.504044 BaseExperiment                  run_full_20180518220530
+   [1]. 0.511098 deGrootExperiment               run_full_20180521224742
+   [2]. 0.510570 SrchIdStandardizedExperiment    run_full_20180519084816
+   [3]. 0.509364 UserHistoryNormalizedExperiment run_full_20180519173841
+   [4]. 0.507500 SrchIdNormalizedExperiment      run_full_20180519032141
+   [5]. 0.504460 UserHistoryExperiment           run_full_20180520004935
+   [6]. 0.504044 BaseExperiment                  run_full_20180518220530
+   [7]. 0.503938 deGrootonlymissingExperiment    run_full_20180522020608
 
