@@ -86,19 +86,19 @@ class AbstractExperiment:
             for row in data_frame.itertuples():
                 output_file.write(self.convert_pandas_row_to_svm_light_format(row) + '\n')
 
-    def run_mini_experiment(self, configuration=None, reset_data=False):
-        self.run_experiment(MINI, configuration, reset_data)
+    def run_mini_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
+        self.run_experiment(MINI, configuration, reset_data, add_to_leaderboard, extra_instructions)
 
-    def run_development_experiment(self, configuration=None, reset_data=False):
-        self.run_experiment(DEVELOPMENT, configuration, reset_data)
+    def run_development_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
+        self.run_experiment(DEVELOPMENT, configuration, reset_data, add_to_leaderboard, extra_instructions)
 
-    def run_medium_experiment(self, configuration=None, reset_data=False):
-        self.run_experiment(MEDIUM, configuration, reset_data)
+    def run_medium_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
+        self.run_experiment(MEDIUM, configuration, reset_data, add_to_leaderboard, extra_instructions)
 
-    def run_full_experiment(self, configuration=None, reset_data=False):
-        self.run_experiment(FULL, configuration, reset_data)
+    def run_full_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
+        self.run_experiment(FULL, configuration, reset_data, add_to_leaderboard, extra_instructions)
 
-    def run_experiment(self, experiment_size, configuration, reset_data):
+    def run_experiment(self, experiment_size, configuration, reset_data, add_to_leaderboard, extra_instructions):
         starting_time = datetime.now()
 
         log("EXPERIMENT START", starting_time)
@@ -212,31 +212,39 @@ class AbstractExperiment:
 
         split_folder = 'output/{}'.format(self.split_identifier)
 
-        with open(split_folder + '/leaderboard.json', "a+") as json_file:
-            try:
-                json_file.seek(0)
-                leaderboard = json.load(json_file)
-            except ValueError:
-                leaderboard = {}
+        if add_to_leaderboard:
+            with open(split_folder + '/leaderboard.json', "a+") as json_file:
+                try:
+                    json_file.seek(0)
+                    leaderboard = json.load(json_file)
+                except ValueError:
+                    leaderboard = {}
 
-            if experiment_size not in leaderboard:
-                leaderboard[experiment_size] = []
+                if experiment_size not in leaderboard:
+                    leaderboard[experiment_size] = []
 
-            leaderboard[experiment_size].append((test_set_performance, self.experiment_name, run_identifier))
-            leaderboard[experiment_size] = sorted(leaderboard[experiment_size], key=lambda tup: tup[0], reverse=True)
-            json_file.truncate(0)
-            json.dump(leaderboard, json_file)
+                leaderboard[experiment_size].append((test_set_performance, self.experiment_name, run_identifier))
+                leaderboard[experiment_size] = sorted(leaderboard[experiment_size], key=lambda tup: tup[0], reverse=True)
+                json_file.truncate(0)
+                json.dump(leaderboard, json_file)
 
-            with open(split_folder + '/leaderboard.txt', "w") as txt_file:
-                for exp_size in leaderboard:
-                    txt_file.write(exp_size + '\n')
-                    largest_experiment_name = max([len(row[1]) for row in leaderboard[exp_size]])
-                    for i, row in enumerate(leaderboard[exp_size]):
-                        txt_file.write("   {ind}. {ndcg:1.6f} {name:<{len}} {run}\n".format(
-                            ind='[' + str(i + 1) + ']', ndcg=row[0], name=row[1], run=row[2], len=largest_experiment_name)
-                        )
-                    txt_file.write('\n')
+                with open(split_folder + '/leaderboard.txt', "w") as txt_file:
+                    for exp_size in leaderboard:
+                        txt_file.write(exp_size + '\n')
+                        largest_experiment_name = max([len(row[1]) for row in leaderboard[exp_size]])
+                        for i, row in enumerate(leaderboard[exp_size]):
+                            txt_file.write("   {ind}. {ndcg:1.6f} {name:<{len}} {run}\n".format(
+                                ind='[' + str(i + 1) + ']', ndcg=row[0], name=row[1], run=row[2], len=largest_experiment_name)
+                            )
+                        txt_file.write('\n')
 
         copyfile(data_set_location + '/example_data.csv', output_folder + '/example_data.csv')
 
         log("All output done!", starting_time, output_timer)
+
+        if extra_instructions is not None:
+            extra_instructions({
+                'output_folder': output_folder,
+            })
+
+            log("Performed extra instructions.", starting_time, output_timer)
