@@ -1,0 +1,9 @@
+Details of run run_development_20180524143408 of BaseExperimentwithimprovedleafs on the development set.
+Experiment took 11.9381666667 minutes.
+About BaseExperimentwithimprovedleafs: The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
+Used split: spl_20180518114037
+Result: nDCG 0.494886735086 on test set after 198 epochs.
+Result: nDCG 0.497610392388 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 10, 'min_samples_split': 2, 'max_depth': None}
