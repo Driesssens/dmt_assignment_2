@@ -12,6 +12,7 @@ class BaseExperiment(DeploymentExperiment):
         return raw_data_frame
 
 
-# BaseExperiment().run_mini_experiment()
 
-BaseExperiment().run_deployment(run_identifier="run_mini_20180524212118",reset_data=False)
+BaseExperiment().run_mini_experiment()
+
+BaseExperiment().run_deployment(run_identifier=None,reset_data=False)

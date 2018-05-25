@@ -47,6 +47,78 @@ def minutes_passed(starting_time):
     return (datetime.now() - starting_time).total_seconds() / 60
 
 
+def dcg_at_k(r, k, method=0):
+    """Score is discounted cumulative gain (dcg)
+    Relevance is positive real values.  Can use binary
+    as the previous methods.
+    Example from
+    http://www.stanford.edu/class/cs276/handouts/EvaluationNew-handout-6-per.pdf
+    >>> r = [3, 2, 3, 0, 0, 1, 2, 2, 3, 0]
+    >>> dcg_at_k(r, 1)
+    3.0
+    >>> dcg_at_k(r, 1, method=1)
+    3.0
+    >>> dcg_at_k(r, 2)
+    5.0
+    >>> dcg_at_k(r, 2, method=1)
+    4.2618595071429155
+    >>> dcg_at_k(r, 10)
+    9.6051177391888114
+    >>> dcg_at_k(r, 11)
+    9.6051177391888114
+    Args:
+        r: Relevance scores (list or numpy) in rank order
+            (first element is the first item)
+        k: Number of results to consider
+        method: If 0 then weights are [1.0, 1.0, 0.6309, 0.5, 0.4307, ...]
+                If 1 then weights are [1.0, 0.6309, 0.5, 0.4307, ...]
+    Returns:
+        Discounted cumulative gain
+    """
+    r = numpy.asfarray(r)[:k]
+    if r.size:
+        if method == 0:
+            return r[0] + numpy.sum(r[1:] / numpy.log2(numpy.arange(2, r.size + 1)))
+        elif method == 1:
+            return numpy.sum(r / numpy.log2(numpy.arange(2, r.size + 2)))
+        else:
+            raise ValueError('method must be 0 or 1.')
+    return 0.
+
+
+def ndcg_at_k(r, k, method=1):
+    """Score is normalized discounted cumulative gain (ndcg)
+    Relevance is positive real values.  Can use binary
+    as the previous methods.
+    Example from
+    http://www.stanford.edu/class/cs276/handouts/EvaluationNew-handout-6-per.pdf
+    >>> r = [3, 2, 3, 0, 0, 1, 2, 2, 3, 0]
+    >>> ndcg_at_k(r, 1)
+    1.0
+    >>> r = [2, 1, 2, 0]
+    >>> ndcg_at_k(r, 4)
+    0.9203032077642922
+    >>> ndcg_at_k(r, 4, method=1)
+    0.96519546960144276
+    >>> ndcg_at_k([0], 1)
+    0.0
+    >>> ndcg_at_k([1], 2)
+    1.0
+    Args:
+        r: Relevance scores (list or numpy) in rank order
+            (first element is the first item)
+        k: Number of results to consider
+        method: If 0 then weights are [1.0, 1.0, 0.6309, 0.5, 0.4307, ...]
+                If 1 then weights are [1.0, 0.6309, 0.5, 0.4307, ...]
+    Returns:
+        Normalized discounted cumulative gain
+    """
+    dcg_max = dcg_at_k(sorted(r, reverse=True), k, method)
+    if not dcg_max:
+        return 0.
+    return dcg_at_k(r, k, method) / float(dcg_max)
+
+
 class DeploymentExperiment(AbstractExperiment):
     experiment_name = None
     experiment_description = None
@@ -80,7 +152,18 @@ class DeploymentExperiment(AbstractExperiment):
                 output_file.write(self.convert_pandas_row_to_svm_light_format_deployment(row) + '\n')
 
 
-    def run_deployment(self, deployment_set_location='data/test_set_VU_DM_2014.csv', run_identifier="run_mini_20180524212118", training_CHECK=True, experiment_size=MINI, reset_data=False):
+    def run_deployment(self, deployment_set_location='data/test_set_VU_DM_2014.csv', run_identifier=None, training_CHECK=True, experiment_size=MINI, reset_data=False):
+        """
+        Args:
+            deployment_set_location: Location of the dataset is remodeled given the model
+            run_identifier: location of the model of the run that is used. If no run_indentifier is specified the model will use the last model that is generated.
+            training_CHECK: uses the test set to generate an comparison dataset to check if the model is doing it's work correctly
+            experiment_size: The experiment size of the trainingscheck. If not yet generated will be generated now.
+            reset_data: will reset the data of the experiments and rebuild the experiments.
+        Returns:
+            several files in the output folder.
+        """
+
 
         # Turn on logging.
         logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.INFO)
@@ -101,11 +184,20 @@ class DeploymentExperiment(AbstractExperiment):
         # Check if the model has a second set that can be used to validate if the model works and if the model shows the correct results.
         if training_CHECK:
             data_valid_location = 'data/training_set_VU_DM_2014.csv'
-            store_svm_light_loc_valid = "data/{}/{}/{}/".format(self.split_identifier, self.experiment_name, "valid_deployment")
-            valid_test_set_name = "valid_test_set" + experiment_size
+            store_svm_light_loc_valid = "data/{}/{}/{}/".format(self.split_identifier, self.experiment_name, experiment_size)
+            valid_test_set_name = "test"
 
         
         # Using the model indentifier to locate the model that is used to run the model.
+        identifier = 0
+        if run_identifier == None:
+            list_of_dir = os.listdir("output/{}/{}/".format(self.split_identifier, self.experiment_name))
+            for elem in list_of_dir:
+                if int(elem.split("_")[-1]) > identifier:
+                    run_identifier = elem
+        if run_identifier == None:
+            raise ValueError('Run identifier can not find a run able to use as input for the model')
+
         model_location = "output/{}/{}/{}/".format(self.split_identifier, self.experiment_name, run_identifier)
 
         # Model location is equal to the location in which the output of the dataset is stored.
@@ -141,7 +233,10 @@ class DeploymentExperiment(AbstractExperiment):
 
             # Store converted data            
             test_set_path = store_svm_light_loc_VU + VU_test_set_name
-            self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
+            # deployment and other version
+            # self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
+            
+            self.store_data_frame_as_svm_light(test_set, test_set_path)
 
             # Retrieve the correct list index for pandas later
             prop_loc_id = [x for x in list(test_set.columns) if x not in NON_FEATURE_COLUMNS + self.ignored_features].index("prop_id")
@@ -228,15 +323,20 @@ class DeploymentExperiment(AbstractExperiment):
 
             # Storing test results
             i = 0
+            qid_ndcg = []
             with open(output_folder + 'valid_set_values.csv', "w+") as tf:
-                tf.write("SearchId ,PropertyId \n")
+                tf.write("SearchId ,PropertyId, relevance_score \n")
                 for qid in valid_data.query_ids:
                     propId = valid_data.get_query(qid).get_feature_vectors(0)[:,prop_loc_id]
+                    relevance_score = valid_data.get_query(qid).relevance_scores
+                    relevance_score_sorted = []
                     for elem in valid_set_performance[i]:
-                        tf.write(str(qid) + ", " + str(int(propId[elem])) + '\n' )
+                        tf.write(str(qid) + ", " + str(int(propId[elem]))+ ", "  + str(int(relevance_score[elem])) + '\n' )
+                        relevance_score_sorted.append(int(relevance_score[elem]))
                     i += 1
-
-
+                    qid_ndcg.append(ndcg_at_k(relevance_score_sorted, len(relevance_score_sorted)))
+        logging.info('%s on the test queries according to rankpy metrics: %.8f' % (model.metric, model.evaluate(valid_data, n_jobs=-1)))
+        logging.info('%s on the test queries according to own metrics: %.8f' % ("nDCG", sum(qid_ndcg)/float(len(qid_ndcg))))
 
         logging.info('================================================================================')
         ## Testing the model on the VU test data
@@ -248,7 +348,7 @@ class DeploymentExperiment(AbstractExperiment):
 
         # Storing test results
         i = 0
-        with open(output_folder + 'test_set_values.csv', "w+") as tf:
+        with open(output_folder + 'VU_prediction_results_group_106.csv', "w+") as tf:
             tf.write("SearchId ,PropertyId \n")
             for qid in test_data.query_ids:
                 propId = test_data.get_query(qid).get_feature_vectors(0)[:,prop_loc_id]
