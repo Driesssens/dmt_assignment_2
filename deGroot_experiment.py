@@ -8,27 +8,27 @@ import numpy
 class DeGrootExperiment(AbstractExperiment):
     split_identifier = "spl_20180518114037"
 
-    experiment_name = "deGrootonlymissingExperiment"
+    experiment_name = "Developmenttrainingdatareset0combining"
     experiment_description = """Basic experiment only adding in some features for the missing values."""
 
     ignored_features = ['date_time']
 
     def missing_value_default(self, feature_name, feature_value):
 
-        if feature_name == 'visitor_hist_starrating':
-            return '3.374334'
+        # if feature_name == 'visitor_hist_starrating':
+        #     return '3.374334'
 
-        if feature_name == 'visitor_hist_adr_usd':
-            return '0.000000'
+        # if feature_name == 'visitor_hist_adr_usd':
+        #     return '0.000000'
 
-        if feature_name == 'prop_review_score':
-            return '0.000000'
+        # if feature_name == 'prop_review_score':
+        #     return '0.000000'
 
-        if feature_name == 'prop_location_score2':
-            return '0.000000'
+        # if feature_name == 'prop_location_score2':
+        #     return '0.000000'
 
-        if feature_name == 'srch_query_affinity_score':
-            return '-24.14641'
+        # if feature_name == 'srch_query_affinity_score':
+        #     return '-24.14641'
 
         if feature_name == 'orig_destination_distance':
             return '0.000000'
@@ -68,9 +68,4 @@ class DeGrootExperiment(AbstractExperiment):
         return raw_data_frame
 
 
-
-DeGrootExperiment().run_mini_experiment(reset_data=False)
-DeGrootExperiment().run_development_experiment(reset_data=False)
-DeGrootExperiment().run_medium_experiment(reset_data=False)
-DeGrootExperiment().run_full_experiment(reset_data=False)
 
