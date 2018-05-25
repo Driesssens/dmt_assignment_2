@@ -1,0 +1,12 @@
+Message: This only contains 3 features.
+Split: spl_20180518114037
+Size: mini
+
+prop_starrating: 0.38409107037
+prop_id: 0.356952784389
+prop_brand_bool: 0.361714528164
+
+Feature list: ['prop_starrating', 'prop_id', 'prop_brand_bool']
+
+nDCGs list: [0.3840910703695619, 0.356952784388599, 0.36171452816379307]
+

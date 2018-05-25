@@ -1,0 +1,8 @@
+Message: This only contains one feature.
+
+prop_starrating: 0.381531420776
+
+Feature list: ['prop_starrating']
+
+nDCGs list: [0.381531420776188]
+
