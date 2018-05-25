@@ -13,6 +13,6 @@ class BaseExperiment(DeploymentExperiment):
 
 
 
-BaseExperiment().run_mini_experiment()
+# BaseExperiment().run_mini_experiment()
 
-BaseExperiment().run_deployment(run_identifier=None,reset_data=False)
+BaseExperiment().run_deployment(run_identifier=None, reset_data=False, relevance_score_testing=True)

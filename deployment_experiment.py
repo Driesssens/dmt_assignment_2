@@ -126,7 +126,7 @@ class DeploymentExperiment(AbstractExperiment):
     split_identifier = None
 
 
-    def convert_pandas_row_to_svm_light_format_deployment(self, pandas_row):
+    def convert_pandas_row_to_svm_light_format_deployment(self, pandas_row, missing_values_old_style=False):
         qid = pandas_row.srch_id
         relevance_grade = 0
 
@@ -136,23 +136,22 @@ class DeploymentExperiment(AbstractExperiment):
 
         for feature_name, feature_value in pandas_row._asdict().iteritems():
             if feature_name not in NON_FEATURE_COLUMNS + self.ignored_features:
-                if numpy.isnan(feature_value) or numpy.isinf(feature_value):
-                    sanitized_feature_value = self.missing_value_default(feature_name, feature_value)
-                else:
-                    sanitized_feature_value = feature_value
+                if missing_values_old_style:
+                    if numpy.isnan(feature_value) or numpy.isinf(feature_value):
+                        feature_value = self.missing_value_default(feature_name, feature_value)
 
-                svm_light_string += '{}:{} '.format(feature_number, sanitized_feature_value)
+                svm_light_string += '{}:{} '.format(feature_number, feature_value)
                 feature_number += 1
 
         return svm_light_string
 
-    def store_data_frame_as_svm_light_deployment(self, data_frame, file_name):
+    def store_data_frame_as_svm_light_deployment(self, data_frame, file_name, missing_values_old_style=False):
         with open(file_name, 'w') as output_file:
             for row in data_frame.itertuples():
-                output_file.write(self.convert_pandas_row_to_svm_light_format_deployment(row) + '\n')
+                output_file.write(self.convert_pandas_row_to_svm_light_format_deployment(row, missing_values_old_style) + '\n')
 
 
-    def run_deployment(self, deployment_set_location='data/test_set_VU_DM_2014.csv', run_identifier=None, training_CHECK=True, experiment_size=MINI, reset_data=False):
+    def run_deployment(self, deployment_set_location='data/test_set_VU_DM_2014.csv', run_identifier=None, training_CHECK=True, experiment_size=MINI, reset_data=False, relevance_score_testing=False):
         """
         Args:
             deployment_set_location: Location of the dataset is remodeled given the model
@@ -234,9 +233,9 @@ class DeploymentExperiment(AbstractExperiment):
             # Store converted data            
             test_set_path = store_svm_light_loc_VU + VU_test_set_name
             # deployment and other version
-            # self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
+            self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
             
-            self.store_data_frame_as_svm_light(test_set, test_set_path)
+
 
             # Retrieve the correct list index for pandas later
             prop_loc_id = [x for x in list(test_set.columns) if x not in NON_FEATURE_COLUMNS + self.ignored_features].index("prop_id")
@@ -287,7 +286,11 @@ class DeploymentExperiment(AbstractExperiment):
 
             # Store converted data            
             test_set_path = store_svm_light_loc_valid + valid_test_set_name
-            self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
+
+            if relevance_score_testing:
+                self.store_data_frame_as_svm_light(test_set, test_set_path)
+            else:
+                self.store_data_frame_as_svm_light_deployment(test_set, test_set_path)
 
             log("Generated the {} set!".format("test_set_complete"), starting_time, data_generation_timer)
 
@@ -314,34 +317,52 @@ class DeploymentExperiment(AbstractExperiment):
         ## Testing the model on the validation set
         # Load Queries
         if training_CHECK:
-            valid_data = Queries.load_from_text(store_svm_light_loc_valid + valid_test_set_name)
-
-
-            # Test model
-            valid_set_performance = model.predict_rankings(valid_data, n_jobs=-1)
 
 
             # Storing test results
-            i = 0
-            qid_ndcg = []
-            with open(output_folder + 'valid_set_values.csv', "w+") as tf:
-                tf.write("SearchId ,PropertyId, relevance_score \n")
-                for qid in valid_data.query_ids:
-                    propId = valid_data.get_query(qid).get_feature_vectors(0)[:,prop_loc_id]
-                    relevance_score = valid_data.get_query(qid).relevance_scores
-                    relevance_score_sorted = []
-                    for elem in valid_set_performance[i]:
-                        tf.write(str(qid) + ", " + str(int(propId[elem]))+ ", "  + str(int(relevance_score[elem])) + '\n' )
-                        relevance_score_sorted.append(int(relevance_score[elem]))
-                    i += 1
-                    qid_ndcg.append(ndcg_at_k(relevance_score_sorted, len(relevance_score_sorted)))
-        logging.info('%s on the test queries according to rankpy metrics: %.8f' % (model.metric, model.evaluate(valid_data, n_jobs=-1)))
-        logging.info('%s on the test queries according to own metrics: %.8f' % ("nDCG", sum(qid_ndcg)/float(len(qid_ndcg))))
+            #testing with relevance_score
+            if relevance_score_testing:
+                valid_data = Queries.load_from_text(store_svm_light_loc_valid + valid_test_set_name, has_sorted_relevances=True)
+
+
+                # Test model
+                valid_set_performance = model.predict_rankings(valid_data, n_jobs=-1)
+                i = 0
+                qid_ndcg = []
+                with open(output_folder + 'valid_set_values_with_rel.csv', "w+") as tf:
+                    tf.write("SearchId ,PropertyId, relevance_score \n")
+                    for qid in valid_data.query_ids:
+                        propId = valid_data.get_query(qid).get_feature_vectors(0)[:,prop_loc_id]
+                        relevance_score = valid_data.get_query(qid).relevance_scores
+                        relevance_score_sorted = []
+                        for elem in valid_set_performance[i]:
+                            tf.write(str(qid) + ", " + str(int(propId[elem]))+ ", "  + str(int(relevance_score[elem])) + '\n' )
+                            relevance_score_sorted.append(int(relevance_score[elem]))
+                        i += 1
+                        qid_ndcg.append(ndcg_at_k(relevance_score_sorted, len(relevance_score_sorted)))
+                logging.info('%s on the test queries according to rankpy metrics: %.8f' % (model.metric, model.evaluate(valid_data, n_jobs=-1)))
+                logging.info('%s on the test queries according to own metrics: %.8f' % ("nDCG", sum(qid_ndcg)/float(len(qid_ndcg))))
+            else:
+                # Testing witout relevance score
+                valid_data = Queries.load_from_text(store_svm_light_loc_valid + valid_test_set_name, has_sorted_relevances=True)
+
+
+                # Test model
+                valid_set_performance = model.predict_rankings(valid_data, n_jobs=-1)
+                i = 0
+                with open(output_folder + 'valid_set_values_without_rel.csv', "w+") as tf:
+                    tf.write("SearchId ,PropertyId \n")
+                    for qid in valid_data.query_ids:
+                        propId = valid_data.get_query(qid).get_feature_vectors(0)[:,prop_loc_id]
+                        for elem in valid_set_performance[i]:
+                            tf.write(str(qid) + ", " + str(int(propId[elem])) + '\n' )
+                        i += 1
+        return
 
         logging.info('================================================================================')
         ## Testing the model on the VU test data
         # Load Queries
-        test_data = Queries.load_from_text(store_svm_light_loc_VU + VU_test_set_name)
+        test_data = Queries.load_from_text(store_svm_light_loc_VU + VU_test_set_name, has_sorted_relevances=True)
        
         # Test model
         test_data_set_performance = model.predict_rankings(test_data, n_jobs=-1)
