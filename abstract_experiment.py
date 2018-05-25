@@ -190,6 +190,10 @@ class AbstractExperiment:
             os.makedirs(output_folder)
 
         model.save(output_folder + '/trained_model')
+
+        with open(output_folder + '/trained_model.pkl', 'wb') as secondstorage:
+            pickle.dump(model, secondstorage)
+
         open(output_folder + '/nDCG_test_{}'.format(str(test_set_performance)), 'w+')
         open(output_folder + '/nDCG_validation_{}'.format(str(validation_performance)), 'w+')
 
