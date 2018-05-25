@@ -357,7 +357,6 @@ class DeploymentExperiment(AbstractExperiment):
                         for elem in valid_set_performance[i]:
                             tf.write(str(qid) + ", " + str(int(propId[elem])) + '\n' )
                         i += 1
-        return
 
         logging.info('================================================================================')
         ## Testing the model on the VU test data
