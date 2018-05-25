@@ -46,6 +46,28 @@ def minutes_passed(starting_time):
     return (datetime.now() - starting_time).total_seconds() / 60
 
 
+def store_data_frame_as_svm_light(data_frame, file_name):
+    with open(file_name, 'w') as output_file:
+        for row in data_frame.itertuples():
+            output_file.write(convert_pandas_row_to_svm_light_format(row) + '\n')
+
+
+def convert_pandas_row_to_svm_light_format(pandas_row):
+    qid = pandas_row.srch_id
+    relevance_grade = 5 if pandas_row.booking_bool is 1 else pandas_row.click_bool
+
+    svm_light_string = "{} qid:{} ".format(relevance_grade, qid)
+
+    feature_number = 1
+
+    for feature_name, feature_value in pandas_row._asdict().iteritems():
+        if feature_name not in NON_FEATURE_COLUMNS:
+            svm_light_string += '{}:{} '.format(feature_number, feature_value)
+            feature_number += 1
+
+    return svm_light_string
+
+
 class AbstractExperiment:
     experiment_name = None
     experiment_description = None
@@ -79,7 +101,7 @@ class AbstractExperiment:
         # NOT IMPLEMENTED
         pass
 
-    def convert_pandas_row_to_svm_light_format(self, pandas_row, missing_values_old_style=False):
+    def OLD_convert_pandas_row_to_svm_light_format(self, pandas_row):
         qid = pandas_row.srch_id
         relevance_grade = 5 if pandas_row.booking_bool is 1 else pandas_row.click_bool
 
@@ -89,19 +111,18 @@ class AbstractExperiment:
 
         for feature_name, feature_value in pandas_row._asdict().iteritems():
             if feature_name not in NON_FEATURE_COLUMNS + self.ignored_features:
-                if missing_values_old_style:
-                    if numpy.isnan(feature_value) or numpy.isinf(feature_value):
-                        feature_value = self.missing_value_default(feature_name, feature_value)
+                if numpy.isnan(feature_value) or numpy.isinf(feature_value):
+                    feature_value = self.missing_value_default(feature_name, feature_value)
 
                 svm_light_string += '{}:{} '.format(feature_number, feature_value)
                 feature_number += 1
 
         return svm_light_string
 
-    def store_data_frame_as_svm_light(self, data_frame, file_name, missing_values_old_style=False):
+    def OLD_store_data_frame_as_svm_light(self, data_frame, file_name):
         with open(file_name, 'w') as output_file:
             for row in data_frame.itertuples():
-                output_file.write(self.convert_pandas_row_to_svm_light_format(row, missing_values_old_style) + '\n')
+                output_file.write(self.OLD_convert_pandas_row_to_svm_light_format(row) + '\n')
 
     def run_mini_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
         self.run_experiment(MINI, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
@@ -116,12 +137,17 @@ class AbstractExperiment:
         self.run_experiment(FULL, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
     def make_data_set(self, data_frame):
-        new_data_frame = self.feature_engineering(data_frame)
+        feature_engineered_data_frame = self.feature_engineering(data_frame)
 
         if self.column_specific_missing_value_fillers is not None:
-            new_data_frame = new_data_frame.fillna(self.column_specific_missing_value_fillers)
+            column_specific_filled_data_frame = feature_engineered_data_frame.fillna(self.column_specific_missing_value_fillers)
+        else:
+            column_specific_filled_data_frame = feature_engineered_data_frame
 
-        return new_data_frame.fillna(self.general_missing_value_filler)
+        fully_filled_data_frame = column_specific_filled_data_frame.fillna(self.general_missing_value_filler)
+        ignored_features_data_frame = fully_filled_data_frame.drop(self.ignored_features, axis=1)
+
+        return ignored_features_data_frame
 
     def run_experiment(self, experiment_size, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style):
         starting_time = datetime.now()
@@ -157,15 +183,18 @@ class AbstractExperiment:
 
                 pandas.set_option('mode.use_inf_as_null', True)
 
+                data_set_path = data_set_location + '/' + set_name
+
                 if missing_values_old_style:
                     data_set = self.feature_engineering(sample_rows)
+                    self.OLD_store_data_frame_as_svm_light(data_set, data_set_path)
                 else:
                     data_set = self.make_data_set(sample_rows)
+                    store_data_frame_as_svm_light(data_set, data_set_path)
 
-                data_set_path = data_set_location + '/' + set_name
-                self.store_data_frame_as_svm_light(data_set, data_set_path, missing_values_old_style)
                 if set_name == 'training':
                     data_set.head(250).to_csv(data_set_location + '/example_data.csv')
+
                 log("Generated the {} set!".format(set_name), starting_time, timer)
 
             log("All data generated.".format(minutes_passed(starting_time)), starting_time, data_generation_timer)

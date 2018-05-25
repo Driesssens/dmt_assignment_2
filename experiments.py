@@ -8,9 +8,7 @@ from missing_values_test_experiment import MissingValuesTestExperiment
 
 
 def run_some_experiments():
-    # MissingValuesTestExperiment().run_mini_experiment(reset_data=True)
-    SrchIdStandardizedExperiment().run_mini_experiment(reset_data=True)
-    SrchIdNormalizedExperiment().run_mini_experiment(reset_data=True)
+    OneFeatureExperiment().run_full_experiment(reset_data=True)
 
 
 run_some_experiments()
