@@ -52,16 +52,34 @@ class AbstractExperiment:
     ignored_features = None
     split_identifier = None
 
+    # Explanation: column_specific_missing_value_fillers can be a dict from column name to value. After
+    # feature engineering, each missing value in that specific column will be filled with that specific
+    # value. All columns that you don't specify in column_specific_missing_value_fillers, their missing
+    # values will be filled by general_missing_value_filler regardless of what column it is. If you simply
+    # keep column_specific_missing_value_fillers at None, every missing value in the whole data frame
+    # will be general_missing_value_filler. So the order of application is like this:
+    # feature_engineering --> column_specific_missing_value_fillers --> general_missing_value_filler
+
+    column_specific_missing_value_fillers = None
+    general_missing_value_filler = 0.0
+
     def missing_value_default(self, feature_name, feature_value):
+        ###############################################################################################
+        ############ DEPRECATED. USE missing_value_filler OR missing_value_fillers INSTEAD ############
+        ############ IF YOU STILL USE THIS, ADD missing_values_old_style=True TO run_experiment() #####
+        ###############################################################################################
+
         # Can be overwritten in child classes - but should probably be done in feature_engineering instead.
         # This function handles missing values even after the feature engineering. Also handles inf, nan, etc.
+
+        raise Exception("This method is deprecated. If you really need to use it, implement it in your child class.")
         return '0.000000'
 
     def feature_engineering(self, raw_data_frame):
         # NOT IMPLEMENTED
         pass
 
-    def convert_pandas_row_to_svm_light_format(self, pandas_row):
+    def convert_pandas_row_to_svm_light_format(self, pandas_row, missing_values_old_style=False):
         qid = pandas_row.srch_id
         relevance_grade = 5 if pandas_row.booking_bool is 1 else pandas_row.click_bool
 
@@ -71,34 +89,41 @@ class AbstractExperiment:
 
         for feature_name, feature_value in pandas_row._asdict().iteritems():
             if feature_name not in NON_FEATURE_COLUMNS + self.ignored_features:
-                if numpy.isnan(feature_value) or numpy.isinf(feature_value):
-                    sanitized_feature_value = self.missing_value_default(feature_name, feature_value)
-                else:
-                    sanitized_feature_value = feature_value
+                if missing_values_old_style:
+                    if numpy.isnan(feature_value) or numpy.isinf(feature_value):
+                        feature_value = self.missing_value_default(feature_name, feature_value)
 
-                svm_light_string += '{}:{} '.format(feature_number, sanitized_feature_value)
+                svm_light_string += '{}:{} '.format(feature_number, feature_value)
                 feature_number += 1
 
         return svm_light_string
 
-    def store_data_frame_as_svm_light(self, data_frame, file_name):
+    def store_data_frame_as_svm_light(self, data_frame, file_name, missing_values_old_style=False):
         with open(file_name, 'w') as output_file:
             for row in data_frame.itertuples():
-                output_file.write(self.convert_pandas_row_to_svm_light_format(row) + '\n')
+                output_file.write(self.convert_pandas_row_to_svm_light_format(row, missing_values_old_style) + '\n')
 
-    def run_mini_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
-        self.run_experiment(MINI, configuration, reset_data, add_to_leaderboard, extra_instructions)
+    def run_mini_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.run_experiment(MINI, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
-    def run_development_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
-        self.run_experiment(DEVELOPMENT, configuration, reset_data, add_to_leaderboard, extra_instructions)
+    def run_development_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.run_experiment(DEVELOPMENT, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
-    def run_medium_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
-        self.run_experiment(MEDIUM, configuration, reset_data, add_to_leaderboard, extra_instructions)
+    def run_medium_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.run_experiment(MEDIUM, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
-    def run_full_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None):
-        self.run_experiment(FULL, configuration, reset_data, add_to_leaderboard, extra_instructions)
+    def run_full_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.run_experiment(FULL, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
-    def run_experiment(self, experiment_size, configuration, reset_data, add_to_leaderboard, extra_instructions):
+    def make_data_set(self, data_frame):
+        new_data_frame = self.feature_engineering(data_frame)
+
+        if self.column_specific_missing_value_fillers is not None:
+            new_data_frame = new_data_frame.fillna(self.column_specific_missing_value_fillers)
+
+        return new_data_frame.fillna(self.general_missing_value_filler)
+
+    def run_experiment(self, experiment_size, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style):
         starting_time = datetime.now()
 
         log("EXPERIMENT START", starting_time)
@@ -129,9 +154,16 @@ class AbstractExperiment:
                     qids = pickle.load(fp)
 
                 sample_rows = full_training_set[full_training_set.srch_id.isin(qids)]
-                data_set = self.feature_engineering(sample_rows)
+
+                pandas.set_option('mode.use_inf_as_null', True)
+
+                if missing_values_old_style:
+                    data_set = self.feature_engineering(sample_rows)
+                else:
+                    data_set = self.make_data_set(sample_rows)
+
                 data_set_path = data_set_location + '/' + set_name
-                self.store_data_frame_as_svm_light(data_set, data_set_path)
+                self.store_data_frame_as_svm_light(data_set, data_set_path, missing_values_old_style)
                 if set_name == 'training':
                     data_set.head(250).to_csv(data_set_location + '/example_data.csv')
                 log("Generated the {} set!".format(set_name), starting_time, timer)
@@ -196,6 +228,7 @@ class AbstractExperiment:
         with open(output_folder + '/details.txt', "w+") as df:
             df.write("Details of run {} of {} on the {} set.\n".format(run_identifier, self.experiment_name, experiment_size))
             df.write("Experiment took {} minutes.\n".format(minutes_passed(starting_time)))
+            df.write("Using old missing values system: {}.\n".format(missing_values_old_style))
             df.write("About {}: {}\n".format(self.experiment_name, self.experiment_description))
             df.write("Used split: {}\n".format(self.split_identifier))
             df.write("Result: nDCG {} on test set after {} epochs.\n".format(test_set_performance, model.n_estimators))
