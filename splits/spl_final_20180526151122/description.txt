@@ -1,0 +1,5 @@
+Description of split spl_final_20180526151122
+final set: training 85 %, validation 15 %, test 0 %
+
+qids in final/training                  169825  (85%)
+qids in final/validation:               29970   (15%)

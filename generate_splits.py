@@ -65,4 +65,38 @@ def generate_splits():
                 pickle.dump(qid_set, fp)
 
 
-generate_splits()
+def generate_final_split():
+    full_training_set = pandas.read_csv('data/training_set_VU_DM_2014.csv')
+    all_qids = set(full_training_set.srch_id.unique())
+
+    final_training = 85
+    final_validation = 15
+
+    split_identifier = 'spl_final_{}'.format(datetime.now().strftime('%Y%m%d%H%M%S'))
+
+    with open(cin("splits/{}/description.txt".format(split_identifier)), "w+") as description_file:
+        description_file.write("Description of split {}\n".format(split_identifier))
+
+        description_file.write("{0} set: training {2} {1}, validation {3} {1}, test {4} {1}\n"
+                               .format("final", '%', final_training, final_validation, 0))
+
+        training_qids = set(random.sample(all_qids, len(all_qids) * final_training / 100))
+        validation_qids = all_qids - training_qids
+
+        # should output right amounts of qids
+        print len(training_qids)
+        print len(validation_qids)
+
+        # should output correct percentages
+        print len(training_qids) * 100 / (len(training_qids) + len(validation_qids))
+        print len(validation_qids) * 100 / (len(training_qids) + len(validation_qids))
+
+        # should output empty
+        print training_qids.intersection(validation_qids)
+
+        for qid_set, set_name in [(training_qids, "training"), (validation_qids, "validation")]:
+            with open(cin("splits/{}/{}/{}_qids.pkl".format(split_identifier, "final", set_name)), 'wb+') as fp:
+                pickle.dump(qid_set, fp)
+
+
+generate_final_split()
