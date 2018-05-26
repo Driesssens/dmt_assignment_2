@@ -32,19 +32,20 @@ mini
    [4]. 0.477989 deGrootExperiment                  run_mini_20180521212843
    [5]. 0.477586 SrchIdNormalizedExperiment         run_mini_20180518120316
    [6]. 0.476263 SrchIdStandardizedExperiment       run_mini_20180518115929
-   [7]. 0.473033 moreleafsexperimentonbase          run_mini_20180522111554
-   [8]. 0.471657 BaseExperiment                     run_mini_20180518115627
-   [9]. 0.471657 BaseExperiment                     run_mini_20180518122342
-   [10]. 0.471657 BaseExperiment                     run_mini_20180518140402
-   [11]. 0.471657 UserHistoryExperiment              run_mini_20180518165853
-   [12]. 0.471657 BaseExperiment                     run_mini_20180526041336
-   [13]. 0.471501 BaseExperiment                     run_mini_20180518151756
-   [14]. 0.471501 BaseExperiment                     run_mini_20180518152706
-   [15]. 0.471359 HustinxExperimentE2_month_hour     run_mini_20180518151342
-   [16]. 0.471245 deGrootonlymissingExperiment       run_mini_20180522002651
-   [17]. 0.468652 CtrCvrSrchIdStandardizedExperiment run_mini_20180526043231
-   [18]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526033328
-   [19]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526040145
+   [7]. 0.474143 HustinxExperimentTop               run_mini_20180526130746
+   [8]. 0.473033 moreleafsexperimentonbase          run_mini_20180522111554
+   [9]. 0.471657 BaseExperiment                     run_mini_20180518115627
+   [10]. 0.471657 BaseExperiment                     run_mini_20180518122342
+   [11]. 0.471657 BaseExperiment                     run_mini_20180518140402
+   [12]. 0.471657 UserHistoryExperiment              run_mini_20180518165853
+   [13]. 0.471657 BaseExperiment                     run_mini_20180526041336
+   [14]. 0.471501 BaseExperiment                     run_mini_20180518151756
+   [15]. 0.471501 BaseExperiment                     run_mini_20180518152706
+   [16]. 0.471359 HustinxExperimentE2_month_hour     run_mini_20180518151342
+   [17]. 0.471245 deGrootonlymissingExperiment       run_mini_20180522002651
+   [18]. 0.468652 CtrCvrSrchIdStandardizedExperiment run_mini_20180526043231
+   [19]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526033328
+   [20]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526040145
 
 medium
    [1]. 0.505941 HustinxExperimentE12_missingval_norm_ignore_comp run_medium_20180518233605
