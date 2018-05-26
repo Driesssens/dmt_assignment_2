@@ -1,0 +1,10 @@
+Details of run run_mini_20180526040145 of CtrCvrSrchIdStandardizedExperiment on the mini set.
+Experiment took 2.03905 minutes.
+Using old missing values system: False.
+About CtrCvrSrchIdStandardizedExperiment: Adds the CTR (click through rate) and CVR (conversion rate) of the prop_id to every row, as well as srch_id-standardized versions of them (and all other normal variables).
+Used split: spl_20180518114037
+Result: nDCG 0.366228714035 on test set after 19 epochs.
+Result: nDCG 0.370610099714 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}

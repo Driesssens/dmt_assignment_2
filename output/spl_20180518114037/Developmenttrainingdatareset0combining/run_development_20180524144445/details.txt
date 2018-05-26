@@ -1,0 +1,9 @@
+Details of run run_development_20180524144445 of Developmenttrainingdatareset0combining on the development set.
+Experiment took 10.06575 minutes.
+About Developmenttrainingdatareset0combining: Basic experiment only adding in some features for the missing values.
+Used split: spl_20180518114037
+Result: nDCG 0.49573717978 on test set after 255 epochs.
+Result: nDCG 0.497292240812 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 10, 'min_samples_split': 2, 'max_depth': None}

@@ -1,16 +1,10 @@
-from base_experiment import BaseExperiment
-from srch_id_standardized_experiment import SrchIdStandardizedExperiment
-from srch_id_normalized_experiment import SrchIdNormalizedExperiment
-from user_history_experiment import UserHistoryExperiment
-from user_history_normalized_experiment import UserHistoryNormalizedExperiment
+from super_experiment import SuperExperiment
+from super_ctr_cvr_experiment import SuperCtrCvrExperiment
 
 
 def run_some_experiments():
-    BaseExperiment().run_full_experiment()
-    SrchIdNormalizedExperiment().run_full_experiment()
-    SrchIdStandardizedExperiment().run_full_experiment()
-    UserHistoryNormalizedExperiment().run_full_experiment()
-    UserHistoryExperiment().run_full_experiment()
+    SuperExperiment().run_full_experiment(reset_data=True)
+    SuperCtrCvrExperiment().run_full_experiment(reset_data=True)
 
 
 run_some_experiments()

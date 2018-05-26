@@ -1,38 +1,50 @@
 development
    [1]. 0.500572 HustinxExperimentE12_missingval_norm_ignore_comp              run_development_20180518230823
-   [2]. 0.499612 HustinxExperimentE11_month_hour_diff_missingval_ignore_comp   run_development_20180518220240
-   [3]. 0.498995 HustinxExperimentE7_month_missingval_ignore_comp              run_development_20180518195354
-   [4]. 0.498874 HustinxExperimentE4_hour_missingval_ignore_comp               run_development_20180518185301
-   [5]. 0.498612 HustinxExperimentE11_month_hour_diff_missingval_ignore_comp   run_development_20180518212335
-   [6]. 0.498568 HustinxExperimentE2_month_hour                                run_development_20180518181812
-   [7]. 0.498006 HustinxExperimentE9_month_hour_seizoen_dagdeel_diff_excl_comp run_development_20180518204132
-   [8]. 0.497930 HustinxExperimentE6_seizoen                                   run_development_20180518193102
-   [9]. 0.497757 HustinxExperimentE3_diff                                      run_development_20180518183403
-   [10]. 0.497490 SrchIdStandardizedExperiment                                  run_development_20180518125746
-   [11]. 0.497466 UserHistoryNormalizedExperiment                               run_development_20180518173332
-   [12]. 0.497448 HustinxExperimentE5_dagdeel                                   run_development_20180518191201
-   [13]. 0.497145 SrchIdNormalizedExperiment                                    run_development_20180518132752
-   [14]. 0.497130 deGrootExperiment                                             run_development_20180521213415
-   [15]. 0.496271 HustinxExperimentE8_month_hour_season_daypart                 run_development_20180518202226
-   [16]. 0.495704 deGrootonlymissingExperiment                                  run_development_20180522003136
-   [17]. 0.495604 UserHistoryExperiment                                         run_development_20180518170934
-   [18]. 0.495035 BaseExperiment                                                run_development_20180518123354
-   [19]. 0.494991 BaseExperiment                                                run_development_20180518154530
+   [2]. 0.499688 SuperExperiment                                               run_development_20180526052433
+   [3]. 0.499612 HustinxExperimentE11_month_hour_diff_missingval_ignore_comp   run_development_20180518220240
+   [4]. 0.498995 HustinxExperimentE7_month_missingval_ignore_comp              run_development_20180518195354
+   [5]. 0.498874 HustinxExperimentE4_hour_missingval_ignore_comp               run_development_20180518185301
+   [6]. 0.498612 HustinxExperimentE11_month_hour_diff_missingval_ignore_comp   run_development_20180518212335
+   [7]. 0.498568 HustinxExperimentE2_month_hour                                run_development_20180518181812
+   [8]. 0.498347 Developmenttrainingdatacombiningwithstandardized              run_development_20180524145542
+   [9]. 0.498006 HustinxExperimentE9_month_hour_seizoen_dagdeel_diff_excl_comp run_development_20180518204132
+   [10]. 0.497930 HustinxExperimentE6_seizoen                                   run_development_20180518193102
+   [11]. 0.497757 HustinxExperimentE3_diff                                      run_development_20180518183403
+   [12]. 0.497570 Developmenttrainingdata0combiningwithstandardized             run_development_20180524151732
+   [13]. 0.497490 SrchIdStandardizedExperiment                                  run_development_20180518125746
+   [14]. 0.497466 UserHistoryNormalizedExperiment                               run_development_20180518173332
+   [15]. 0.497448 HustinxExperimentE5_dagdeel                                   run_development_20180518191201
+   [16]. 0.497145 SrchIdNormalizedExperiment                                    run_development_20180518132752
+   [17]. 0.497130 deGrootExperiment                                             run_development_20180521213415
+   [18]. 0.496271 HustinxExperimentE8_month_hour_season_daypart                 run_development_20180518202226
+   [19]. 0.495737 Developmenttrainingdatareset0combining                        run_development_20180524144445
+   [20]. 0.495704 deGrootonlymissingExperiment                                  run_development_20180522003136
+   [21]. 0.495604 UserHistoryExperiment                                         run_development_20180518170934
+   [22]. 0.495035 BaseExperiment                                                run_development_20180518123354
+   [23]. 0.494991 BaseExperiment                                                run_development_20180518154530
+   [24]. 0.494887 BaseExperimentwithimprovedleafs                               run_development_20180524143408
+   [25]. 0.412476 CtrCvrSrchIdStandardizedExperiment                            run_development_20180526034317
 
 mini
-   [1]. 0.479167 UserHistoryNormalizedExperiment run_mini_20180518171834
-   [2]. 0.477989 deGrootExperiment               run_mini_20180521212843
-   [3]. 0.477586 SrchIdNormalizedExperiment      run_mini_20180518120316
-   [4]. 0.476263 SrchIdStandardizedExperiment    run_mini_20180518115929
-   [5]. 0.473033 moreleafsexperimentonbase       run_mini_20180522111554
-   [6]. 0.471657 BaseExperiment                  run_mini_20180518115627
-   [7]. 0.471657 BaseExperiment                  run_mini_20180518122342
-   [8]. 0.471657 BaseExperiment                  run_mini_20180518140402
-   [9]. 0.471657 UserHistoryExperiment           run_mini_20180518165853
-   [10]. 0.471501 BaseExperiment                  run_mini_20180518151756
-   [11]. 0.471501 BaseExperiment                  run_mini_20180518152706
-   [12]. 0.471359 HustinxExperimentE2_month_hour  run_mini_20180518151342
-   [13]. 0.471245 deGrootonlymissingExperiment    run_mini_20180522002651
+   [1]. 0.479167 UserHistoryNormalizedExperiment    run_mini_20180518171834
+   [2]. 0.478969 SuperCtrCvrExperiment              run_mini_20180526052906
+   [3]. 0.478887 SuperExperiment                    run_mini_20180526051300
+   [4]. 0.477989 deGrootExperiment                  run_mini_20180521212843
+   [5]. 0.477586 SrchIdNormalizedExperiment         run_mini_20180518120316
+   [6]. 0.476263 SrchIdStandardizedExperiment       run_mini_20180518115929
+   [7]. 0.473033 moreleafsexperimentonbase          run_mini_20180522111554
+   [8]. 0.471657 BaseExperiment                     run_mini_20180518115627
+   [9]. 0.471657 BaseExperiment                     run_mini_20180518122342
+   [10]. 0.471657 BaseExperiment                     run_mini_20180518140402
+   [11]. 0.471657 UserHistoryExperiment              run_mini_20180518165853
+   [12]. 0.471657 BaseExperiment                     run_mini_20180526041336
+   [13]. 0.471501 BaseExperiment                     run_mini_20180518151756
+   [14]. 0.471501 BaseExperiment                     run_mini_20180518152706
+   [15]. 0.471359 HustinxExperimentE2_month_hour     run_mini_20180518151342
+   [16]. 0.471245 deGrootonlymissingExperiment       run_mini_20180522002651
+   [17]. 0.468652 CtrCvrSrchIdStandardizedExperiment run_mini_20180526043231
+   [18]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526033328
+   [19]. 0.366229 CtrCvrSrchIdStandardizedExperiment run_mini_20180526040145
 
 medium
    [1]. 0.505941 HustinxExperimentE12_missingval_norm_ignore_comp run_medium_20180518233605
@@ -46,23 +58,27 @@ medium
    [9]. 0.502271 UserHistoryNormalizedExperiment                  run_medium_20180518205133
    [10]. 0.501341 HustinxExperimentE19                             run_medium_20180524202541
    [11]. 0.501238 HustinxExperimentE18                             run_medium_20180524180747
+   [12]. 0.496121 CtrCvrSrchIdStandardizedExperiment               run_medium_20180526050935
 
 full
-   [1]. 0.512124 HustinxExperimentE15_daypart_season_norm_srchid_diff_incl_comp            run_full_20180521022408
-   [2]. 0.511978 HustinxExperimentE13_hour_month_diff_norm_srchid_incl_comp                run_full_20180520004242
-   [3]. 0.511877 MissingValHustinxExperiment2                                              run_full_20180526051002
-   [4]. 0.511834 HustinxExperimentE14_hour_month_season_daypart_diff_norm_srchid_incl_comp run_full_20180520122721
-   [5]. 0.511423 HustinxExperimentE16                                                      run_full_20180523154153
-   [6]. 0.511098 deGrootExperiment                                                         run_full_20180521224742
-   [7]. 0.510807 HustinxExperimentE17                                                      run_full_20180524000848
-   [8]. 0.510570 SrchIdStandardizedExperiment                                              run_full_20180519084816
-   [9]. 0.510302 HustinxExperimentE12_missingval_norm_ignore_comp                          run_full_20180519011804
-   [10]. 0.510092 HustinxExperimentE21                                                      run_full_20180525173105
-   [11]. 0.509364 UserHistoryNormalizedExperiment                                           run_full_20180519173841
-   [12]. 0.507500 SrchIdNormalizedExperiment                                                run_full_20180519032141
-   [13]. 0.507497 SrchIdNormalizedExperiment                                                run_full_20180521173932
-   [14]. 0.504460 UserHistoryExperiment                                                     run_full_20180520004935
-   [15]. 0.504063 BaseExperiment                                                            run_full_20180521120423
-   [16]. 0.504044 BaseExperiment                                                            run_full_20180518220530
-   [17]. 0.503938 deGrootonlymissingExperiment                                              run_full_20180522020608
+   [1]. 0.515965 srchidstandardizermissingdataExperiment                                   run_full_20180523085628
+   [2]. 0.512124 HustinxExperimentE15_daypart_season_norm_srchid_diff_incl_comp            run_full_20180521022408
+   [3]. 0.511978 HustinxExperimentE13_hour_month_diff_norm_srchid_incl_comp                run_full_20180520004242
+   [4]. 0.511877 MissingValHustinxExperiment2                                              run_full_20180526051002
+   [5]. 0.511834 HustinxExperimentE14_hour_month_season_daypart_diff_norm_srchid_incl_comp run_full_20180520122721
+   [6]. 0.511423 HustinxExperimentE16                                                      run_full_20180523154153
+   [7]. 0.511098 deGrootExperiment                                                         run_full_20180521224742
+   [8]. 0.510807 HustinxExperimentE17                                                      run_full_20180524000848
+   [9]. 0.510570 SrchIdStandardizedExperiment                                              run_full_20180519084816
+   [10]. 0.510302 HustinxExperimentE12_missingval_norm_ignore_comp                          run_full_20180519011804
+   [11]. 0.510092 HustinxExperimentE21                                                      run_full_20180525173105
+   [12]. 0.509364 UserHistoryNormalizedExperiment                                           run_full_20180519173841
+   [13]. 0.509339 SuperExperiment                                                           run_full_20180526060437
+   [14]. 0.508090 BaseExperimentepochs1500earlystopping150leafs20                           run_full_20180524012820
+   [15]. 0.507500 SrchIdNormalizedExperiment                                                run_full_20180519032141
+   [16]. 0.507497 SrchIdNormalizedExperiment                                                run_full_20180521173932
+   [17]. 0.504460 UserHistoryExperiment                                                     run_full_20180520004935
+   [18]. 0.504063 BaseExperiment                                                            run_full_20180521120423
+   [19]. 0.504044 BaseExperiment                                                            run_full_20180518220530
+   [20]. 0.503938 deGrootonlymissingExperiment                                              run_full_20180522020608
 
