@@ -5,12 +5,12 @@ from configuration import make_configuration
 import numpy
 
 
-class DeGroot2Experiment(AbstractIzedExperiment):
+class DeGroot3Experiment(AbstractIzedExperiment):
     split_identifier = "spl_20180518114037"
 
-    experiment_name = "full_data_standardized_missing_values"
+    experiment_name = "full_data_standardized_missing_values_minus1leafs20"
     grouped_attributes = ["srch_id"]
-    ization = "standardized"
+    ization = "normalized"
     experiment_description = "Missing values imputed"+ AbstractIzedExperiment.make_description(ization, grouped_attributes)
 
     ignored_features = ['date_time']
@@ -53,9 +53,9 @@ class DeGroot2Experiment(AbstractIzedExperiment):
         raw_data_frame.loc[:,'visitor_hist_starrating'] = raw_data_frame['visitor_hist_starrating'].fillna(value=-1.00)
         raw_data_frame.loc[:,'visitor_hist_adr_usd'] = raw_data_frame['visitor_hist_adr_usd'].fillna(value=-1.00)
         raw_data_frame.loc[:,'prop_review_score'] = raw_data_frame['prop_review_score'].fillna(value=1.00)
-        raw_data_frame.loc[:,'prop_location_score2'] = raw_data_frame['prop_location_score2'].fillna(value=0.30)
-        raw_data_frame.loc[:,'srch_query_affinity_score'] = raw_data_frame['srch_query_affinity_score'].fillna(value=-20.4513)        
-        raw_data_frame.loc[:,'orig_destination_distance'] = raw_data_frame['orig_destination_distance'].fillna(value=325.00)
+        raw_data_frame.loc[:,'prop_location_score2'] = raw_data_frame['prop_location_score2'].fillna(value=-1.00)
+        raw_data_frame.loc[:,'srch_query_affinity_score'] = raw_data_frame['srch_query_affinity_score'].fillna(value=-1.00)        
+        raw_data_frame.loc[:,'orig_destination_distance'] = raw_data_frame['orig_destination_distance'].fillna(value=-1.00)
 
         return raw_data_frame
 
