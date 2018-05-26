@@ -13,6 +13,6 @@ class BaseExperiment(DeploymentExperiment):
 
 
 
-BaseExperiment().run_mini_experiment()
-
-BaseExperiment().run_deployment(run_identifier=None,reset_data=False)
+# BaseExperiment().run_mini_experiment()
+# if no run Identifier is given the model will automatically take the last generated model from the location of the experiment name.
+BaseExperiment().run_deployment(training_CHECK=False, run_identifier=None, reset_data=False, relevance_score_testing=False)
