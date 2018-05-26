@@ -10,6 +10,8 @@ from configuration import standard_configuration
 from configuration import make_model
 import json
 from shutil import copyfile
+from scipy import mean
+from collections import defaultdict
 
 NON_FEATURE_COLUMNS = ['Index',
                        'srch_id',
@@ -73,6 +75,7 @@ class AbstractExperiment:
     experiment_description = None
     ignored_features = None
     split_identifier = None
+    uses_ctr_and_cvr = False
 
     # Explanation: column_specific_missing_value_fillers can be a dict from column name to value. After
     # feature engineering, each missing value in that specific column will be filled with that specific
@@ -136,8 +139,59 @@ class AbstractExperiment:
     def run_full_experiment(self, configuration=None, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
         self.run_experiment(FULL, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style)
 
-    def make_data_set(self, data_frame):
-        feature_engineered_data_frame = self.feature_engineering(data_frame)
+    def get_ctr_and_cvr(self, experiment_size):
+        location = "splits/{}/{}/".format(self.split_identifier, experiment_size)
+
+        with open(location + "ctr.json") as js:
+            ctr = {int(k): v for k, v in json.load(js).items()}
+
+        with open(location + "cvr.json") as js:
+            cvr = {int(k): v for k, v in json.load(js).items()}
+
+        average_ctr = mean(ctr.values())
+        average_cvr = mean(cvr.values())
+
+        ctr = defaultdict(lambda: average_ctr, ctr)
+        cvr = defaultdict(lambda: average_cvr, cvr)
+
+        return ctr, cvr
+
+    def maybe_create_ctr_and_cvr(self, data_frame, experiment_size, qids):
+        location = "splits/{}/{}/".format(self.split_identifier, experiment_size)
+
+        if not (os.path.isfile(location + "ctr.json") and os.path.isfile(location + "cvr.json")):
+            print "CREATING CTR AND CVR FOR {}...".format(experiment_size)
+
+            if experiment_size == FULL:
+                sample_rows = data_frame[~data_frame.srch_id.isin(qids['test'])]
+            else:
+                sample_rows = data_frame[~data_frame.srch_id.isin(qids['validation'] | qids['test'] | qids['validation'])]
+
+            prop_ids = sample_rows['prop_id'].unique()
+
+            ctr = {}
+            cvr = {}
+
+            for i, prop_id in enumerate(prop_ids):
+                relevant_rows = sample_rows.loc[sample_rows['prop_id'] == prop_id]
+                clicks = relevant_rows['click_bool']
+                bookings = relevant_rows['booking_bool']
+
+                ctr[str(prop_id)] = clicks.mean()
+                cvr[str(prop_id)] = bookings.mean()
+
+            with open(location + "ctr.json", 'w+') as fp:
+                json.dump(ctr, fp)
+
+            with open(location + "cvr.json", 'w+') as fp:
+                json.dump(cvr, fp)
+
+    def make_data_set(self, data_frame, experiment_size=None):
+        if self.uses_ctr_and_cvr:
+            ctr, cvr = self.get_ctr_and_cvr(experiment_size)
+            feature_engineered_data_frame = self.feature_engineering(data_frame, ctr, cvr)
+        else:
+            feature_engineered_data_frame = self.feature_engineering(data_frame)
 
         if self.column_specific_missing_value_fillers is not None:
             column_specific_filled_data_frame = feature_engineered_data_frame.fillna(self.column_specific_missing_value_fillers)
@@ -173,13 +227,22 @@ class AbstractExperiment:
             else:
                 log("Folder already existed.", starting_time)
 
+            qids = {}
+
+            for set_name in ["training", "validation", "test"]:
+                with open('splits/{}/{}/{}_qids.pkl'.format(self.split_identifier, experiment_size, set_name), 'rb') as fp:
+                    qids[set_name] = pickle.load(fp)
+
+            if self.uses_ctr_and_cvr:
+                self.maybe_create_ctr_and_cvr(full_training_set, experiment_size, qids)
+
             for set_name in ["training", "validation", "test"]:
                 timer = datetime.now()
                 log("Generating the {} set...".format(set_name), starting_time)
-                with open('splits/{}/{}/{}_qids.pkl'.format(self.split_identifier, experiment_size, set_name), 'rb') as fp:
-                    qids = pickle.load(fp)
+                # with open('splits/{}/{}/{}_qids.pkl'.format(self.split_identifier, experiment_size, set_name), 'rb') as fp:
+                #     qids = pickle.load(fp)
 
-                sample_rows = full_training_set[full_training_set.srch_id.isin(qids)]
+                sample_rows = full_training_set[full_training_set.srch_id.isin(qids[set_name])]
 
                 pandas.set_option('mode.use_inf_as_null', True)
 
@@ -189,7 +252,7 @@ class AbstractExperiment:
                     data_set = self.feature_engineering(sample_rows)
                     self.OLD_store_data_frame_as_svm_light(data_set, data_set_path)
                 else:
-                    data_set = self.make_data_set(sample_rows)
+                    data_set = self.make_data_set(sample_rows, experiment_size)
                     store_data_frame_as_svm_light(data_set, data_set_path)
 
                 if set_name == 'training':

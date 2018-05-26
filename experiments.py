@@ -1,14 +1,10 @@
-from base_experiment import BaseExperiment
-from srch_id_standardized_experiment import SrchIdStandardizedExperiment
-from srch_id_normalized_experiment import SrchIdNormalizedExperiment
-from user_history_experiment import UserHistoryExperiment
-from user_history_normalized_experiment import UserHistoryNormalizedExperiment
-from one_feature_experiment import OneFeatureExperiment
-from missing_values_test_experiment import MissingValuesTestExperiment
+from super_experiment import SuperExperiment
+from super_ctr_cvr_experiment import SuperCtrCvrExperiment
 
 
 def run_some_experiments():
-    OneFeatureExperiment().run_full_experiment(reset_data=True)
+    SuperExperiment().run_full_experiment(reset_data=True)
+    SuperCtrCvrExperiment().run_full_experiment(reset_data=True)
 
 
 run_some_experiments()

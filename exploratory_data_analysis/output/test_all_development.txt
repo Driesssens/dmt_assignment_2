@@ -1,0 +1,58 @@
+Message: Uses DateTimeAsNumberExperiment to test all features.
+Split: spl_20180518114037
+Size: development
+
+date_time: 0.353728855912
+site_id: 0.353728855912
+visitor_location_country_id: 0.353728855912
+visitor_hist_starrating: 0.353728855912
+visitor_hist_adr_usd: 0.353728855912
+prop_country_id: 0.353732456462
+prop_id: 0.356834266207
+prop_starrating: 0.381879542438
+prop_review_score: 0.371509621606
+prop_brand_bool: 0.359398713686
+prop_location_score1: 0.363111125583
+prop_location_score2: 0.432785434714
+prop_log_historical_price: 0.367669379672
+price_usd: 0.382373270118
+promotion_flag: 0.384048181505
+srch_destination_id: 0.353728855912
+srch_length_of_stay: 0.353728855912
+srch_booking_window: 0.353728855912
+srch_adults_count: 0.353728855912
+srch_children_count: 0.353728855912
+srch_room_count: 0.353728855912
+srch_saturday_night_bool: 0.353728855912
+srch_query_affinity_score: 0.359789806488
+orig_destination_distance: 0.354914854269
+random_bool: 0.353728855912
+comp1_rate: 0.353664022824
+comp1_inv: 0.353763111871
+comp1_rate_percent_diff: 0.355296604018
+comp2_rate: 0.358939963892
+comp2_inv: 0.354255572625
+comp2_rate_percent_diff: 0.359459796095
+comp3_rate: 0.35780899707
+comp3_inv: 0.353969544054
+comp3_rate_percent_diff: 0.357277731405
+comp4_rate: 0.354237793629
+comp4_inv: 0.353378182873
+comp4_rate_percent_diff: 0.353406074429
+comp5_rate: 0.361129406563
+comp5_inv: 0.354091476474
+comp5_rate_percent_diff: 0.357696078598
+comp6_rate: 0.354702673865
+comp6_inv: 0.35400193893
+comp6_rate_percent_diff: 0.353780202073
+comp7_rate: 0.355374341583
+comp7_inv: 0.35407314272
+comp7_rate_percent_diff: 0.354569190597
+comp8_rate: 0.360113736829
+comp8_inv: 0.354092192971
+comp8_rate_percent_diff: 0.357048839403
+
+Feature list: ['date_time', 'site_id', 'visitor_location_country_id', 'visitor_hist_starrating', 'visitor_hist_adr_usd', 'prop_country_id', 'prop_id', 'prop_starrating', 'prop_review_score', 'prop_brand_bool', 'prop_location_score1', 'prop_location_score2', 'prop_log_historical_price', 'price_usd', 'promotion_flag', 'srch_destination_id', 'srch_length_of_stay', 'srch_booking_window', 'srch_adults_count', 'srch_children_count', 'srch_room_count', 'srch_saturday_night_bool', 'srch_query_affinity_score', 'orig_destination_distance', 'random_bool', 'comp1_rate', 'comp1_inv', 'comp1_rate_percent_diff', 'comp2_rate', 'comp2_inv', 'comp2_rate_percent_diff', 'comp3_rate', 'comp3_inv', 'comp3_rate_percent_diff', 'comp4_rate', 'comp4_inv', 'comp4_rate_percent_diff', 'comp5_rate', 'comp5_inv', 'comp5_rate_percent_diff', 'comp6_rate', 'comp6_inv', 'comp6_rate_percent_diff', 'comp7_rate', 'comp7_inv', 'comp7_rate_percent_diff', 'comp8_rate', 'comp8_inv', 'comp8_rate_percent_diff']
+
+nDCGs list: [0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.3537324564616191, 0.3568342662066368, 0.381879542438161, 0.3715096216063543, 0.3593987136860707, 0.3631111255828258, 0.43278543471390124, 0.3676693796717452, 0.38237327011843913, 0.38404818150476844, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.35372885591244196, 0.3597898064876048, 0.3549148542689002, 0.35372885591244196, 0.35366402282395626, 0.35376311187068565, 0.35529660401798574, 0.35893996389171795, 0.3542555726250304, 0.35945979609538237, 0.35780899706954233, 0.35396954405447967, 0.35727773140537217, 0.35423779362855307, 0.35337818287316547, 0.353406074429218, 0.36112940656292064, 0.3540914764739979, 0.35769607859790314, 0.35470267386540033, 0.35400193892985565, 0.35378020207310523, 0.3553743415830204, 0.35407314272005314, 0.354569190596967, 0.36011373682947806, 0.3540921929712314, 0.35704883940331333]
+

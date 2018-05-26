@@ -1,0 +1,68 @@
+Message: Uses UserHistoryNormalizedExperiment
+Largest correlation: 0.0888910563926
+Smallest correlation: 3.34614562736e-06
+Average absolute correlation: 0.0108186520041
+
+random_bool: -0.0888910563926
+prop_location_score2|srch_id_normalized: 0.0866868606634
+prop_location_score2: 0.0754367540853
+promotion_flag: 0.0360469243703
+prop_starrating|srch_id_normalized: 0.0338255408011
+price_usd|srch_id_normalized: -0.0310156316238
+prop_review_score: 0.0259358064493
+srch_length_of_stay: -0.024412092595
+prop_starrating: 0.0212059854791
+srch_booking_window: -0.0195822158182
+prop_review_score|srch_id_normalized: 0.0183058540647
+prop_location_score1|srch_id_normalized: 0.01469158933
+comp8_rate: 0.0143436238661
+comp5_rate: 0.0142569607839
+visitor_hist_starrating: 0.011123257947
+comp2_rate: 0.0108812694088
+prop_brand_bool: 0.00999063115762
+visitor_hist_adr_usd: 0.00986101826682
+comp3_rate: 0.00952737379602
+srch_room_count: 0.00794827795412
+srch_saturday_night_bool: 0.0054775146628
+srch_adults_count: -0.00537624166674
+comp7_rate: 0.00459447354716
+comp4_rate: 0.00448433406447
+srch_query_affinity_score: -0.00441686367378
+srch_children_count: 0.00387166952619
+comp6_rate: 0.00386787547878
+comp3_inv: -0.00333303788671
+prop_location_score1: -0.00327321283224
+orig_destination_distance: -0.00268256655248
+comp7_rate_percent_diff: 0.00263704512917
+visitor_location_country_id: 0.00252367723945
+comp6_rate_percent_diff: 0.00216852433699
+comp5_inv: -0.0018283768996
+comp1_inv: -0.00148116712222
+price_usd|personal_difference|srch_id_normalized: 0.00140085814293
+site_id: -0.0013535013644
+prop_country_id: 0.00122742083493
+prop_starrating|personal_difference|srch_id_normalized: -0.00119194900094
+comp2_rate_percent_diff: 0.00111086127808
+prop_log_historical_price: -0.000806534637243
+srch_destination_id: 0.00080035601598
+prop_starrating|personal_difference: 0.000614197319246
+prop_id: -0.000508173024499
+comp5_rate_percent_diff: -0.000431905036652
+comp1_rate: 0.000384947726309
+orig_destination_distance|srch_id_normalized: -0.000373841783806
+comp8_rate_percent_diff: -0.000312602379535
+comp3_rate_percent_diff: -0.0002460461106
+comp4_inv: -0.000240311503149
+comp7_inv: -0.000191309609317
+comp1_rate_percent_diff: 6.92432042671e-05
+price_usd: 6.67615682443e-05
+comp6_inv: -5.60146016319e-05
+comp2_inv: 4.54583993521e-05
+comp8_inv: -3.48197148433e-05
+price_usd|personal_difference: 2.60513662258e-05
+comp4_rate_percent_diff: -3.34614562736e-06
+
+Feature list: ['random_bool', 'prop_location_score2|srch_id_normalized', 'prop_location_score2', 'promotion_flag', 'prop_starrating|srch_id_normalized', 'price_usd|srch_id_normalized', 'prop_review_score', 'srch_length_of_stay', 'prop_starrating', 'srch_booking_window', 'prop_review_score|srch_id_normalized', 'prop_location_score1|srch_id_normalized', 'comp8_rate', 'comp5_rate', 'visitor_hist_starrating', 'comp2_rate', 'prop_brand_bool', 'visitor_hist_adr_usd', 'comp3_rate', 'srch_room_count', 'srch_saturday_night_bool', 'srch_adults_count', 'comp7_rate', 'comp4_rate', 'srch_query_affinity_score', 'srch_children_count', 'comp6_rate', 'comp3_inv', 'prop_location_score1', 'orig_destination_distance', 'comp7_rate_percent_diff', 'visitor_location_country_id', 'comp6_rate_percent_diff', 'comp5_inv', 'comp1_inv', 'price_usd|personal_difference|srch_id_normalized', 'site_id', 'prop_country_id', 'prop_starrating|personal_difference|srch_id_normalized', 'comp2_rate_percent_diff', 'prop_log_historical_price', 'srch_destination_id', 'prop_starrating|personal_difference', 'prop_id', 'comp5_rate_percent_diff', 'comp1_rate', 'orig_destination_distance|srch_id_normalized', 'comp8_rate_percent_diff', 'comp3_rate_percent_diff', 'comp4_inv', 'comp7_inv', 'comp1_rate_percent_diff', 'price_usd', 'comp6_inv', 'comp2_inv', 'comp8_inv', 'price_usd|personal_difference', 'comp4_rate_percent_diff']
+
+Correlations list: [-0.08889105639259487, 0.08668686066341973, 0.07543675408534882, 0.036046924370283576, 0.03382554080105964, -0.031015631623796475, 0.025935806449296793, -0.02441209259496601, 0.021205985479062755, -0.019582215818154874, 0.018305854064723424, 0.01469158933002227, 0.014343623866078292, 0.014256960783880326, 0.011123257947035212, 0.010881269408780073, 0.009990631157615042, 0.009861018266822869, 0.00952737379602103, 0.007948277954115701, 0.005477514662799231, -0.005376241666741471, 0.004594473547159571, 0.004484334064470641, -0.004416863673775751, 0.0038716695261854007, 0.0038678754787810177, -0.0033330378867110558, -0.003273212832235774, -0.00268256655247564, 0.002637045129170967, 0.0025236772394496656, 0.0021685243369910716, -0.0018283768996005534, -0.0014811671222171728, 0.001400858142925105, -0.001353501364401725, 0.0012274208349323061, -0.0011919490009378163, 0.0011108612780806905, -0.0008065346372432155, 0.0008003560159799413, 0.0006141973192462382, -0.0005081730244986088, -0.0004319050366518186, 0.0003849477263090758, -0.0003738417838059754, -0.0003126023795346904, -0.000246046110599506, -0.00024031150314908606, -0.0001913096093171219, 6.92432042671204e-05, 6.676156824433244e-05, -5.601460163192244e-05, 4.545839935207119e-05, -3.4819714843338745e-05, 2.6051366225824547e-05, -3.3461456273618546e-06]
+

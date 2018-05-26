@@ -1,0 +1,10 @@
+Details of run run_development_20180526052433 of SuperExperiment on the development set.
+Experiment took 29.1565666667 minutes.
+Using old missing values system: False.
+About SuperExperiment: Does basically everything we know might be good. Except for missing values. Check the class.
+Used split: spl_20180518114037
+Result: nDCG 0.499688409807 on test set after 211 epochs.
+Result: nDCG 0.503992150745 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}
