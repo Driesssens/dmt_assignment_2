@@ -142,7 +142,7 @@ class HustinxExperimentTop(AbstractIzedExperiment):
         return df
 
 #HustinxExperimentE2().run_mini_experiment(reset_data=True)
-HustinxExperimentTop().run_mini_experiment(reset_data=True, missing_values_old_style=True)
+HustinxExperimentTop().run_medium_experiment(reset_data=True, missing_values_old_style=True)
 
 #short_experiment = make_configuration(epochs=10)
 #HustinxExperimentE().run_development_experiment(configuration=short_experiment)
