@@ -8,6 +8,7 @@ from rankpy.models import LambdaMART
 from datetime import datetime
 from configuration import standard_configuration
 from configuration import make_model
+from configuration import boosted_configuration
 import json
 from shutil import copyfile
 from scipy import mean
@@ -202,6 +203,22 @@ class AbstractExperiment:
         ignored_features_data_frame = fully_filled_data_frame.drop(self.ignored_features, axis=1)
 
         return ignored_features_data_frame
+
+    def run_boosted_experiment(self, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.experiment_name += "Boosted"
+        self.run_full_experiment(configuration=boosted_configuration(),
+                                 reset_data=reset_data,
+                                 add_to_leaderboard=add_to_leaderboard,
+                                 extra_instructions=extra_instructions,
+                                 missing_values_old_style=missing_values_old_style)
+
+    def run_test_experiment(self, reset_data=False, add_to_leaderboard=True, extra_instructions=None, missing_values_old_style=False):
+        self.experiment_name += "Testing"
+        self.run_mini_experiment(configuration=boosted_configuration(),
+                                 reset_data=reset_data,
+                                 add_to_leaderboard=add_to_leaderboard,
+                                 extra_instructions=extra_instructions,
+                                 missing_values_old_style=missing_values_old_style)
 
     def run_experiment(self, experiment_size, configuration, reset_data, add_to_leaderboard, extra_instructions, missing_values_old_style):
         starting_time = datetime.now()

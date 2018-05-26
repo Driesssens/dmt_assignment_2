@@ -8,6 +8,12 @@ def standard_configuration():
     return make_configuration()
 
 
+def boosted_configuration():
+    return make_configuration(max_leaf_nodes=20,
+                              epochs=2000,
+                              estopping=200)
+
+
 def make_configuration(epochs=1000,
                        estopping=50,
                        max_leaf_nodes=7,
