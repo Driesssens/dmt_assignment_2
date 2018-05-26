@@ -1,0 +1,10 @@
+Details of run run_medium_20180526002831 of BaseExperiment15 on the medium set.
+Experiment took 59.1178833333 minutes.
+Using old missing values system: False.
+About BaseExperiment15: The most basic experiment. Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
+Used split: spl_20180518114037
+Result: nDCG 0.503710906685 on test set after 398 epochs.
+Result: nDCG 0.50318870911 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 15, 'min_samples_split': 2, 'max_depth': None}

@@ -394,3 +394,128 @@ class AbstractExperiment:
             })
 
             log("Performed extra instructions.", starting_time, output_timer)
+
+    def run_final_experiment(self, missing_values_old_style):
+        final_split_identifier = "spl_final_20180526151122"
+        experiment_size = "final"
+        self.experiment_name += "Final"
+
+        starting_time = datetime.now()
+
+        log("EXPERIMENT START", starting_time)
+
+        data_set_location = "data/{}/{}/{}".format(final_split_identifier, self.experiment_name, experiment_size)
+        data_set_name = "{}-{}-{}".format(self.experiment_name, final_split_identifier, experiment_size)
+
+        # if reset_data or not os.path.exists(data_set_location):
+        if True:
+            data_generation_timer = datetime.now()
+            data_loading_timer = datetime.now()
+
+            log("Data set {} had not yet been generated (or needs to be regenerated). Will generate now...".format(data_set_name), starting_time)
+
+            full_training_set = pandas.read_csv('data/training_set_VU_DM_2014.csv')
+            log("Loaded full data set.", starting_time, data_loading_timer)
+
+            if not os.path.exists(data_set_location):
+                os.makedirs(data_set_location)
+                log("Created folder.", starting_time)
+            else:
+                log("Folder already existed.", starting_time)
+
+            qids = {}
+
+            for set_name in ["training", "validation"]:
+                with open('splits/{}/{}/{}_qids.pkl'.format(final_split_identifier, experiment_size, set_name), 'rb') as fp:
+                    qids[set_name] = pickle.load(fp)
+
+            for set_name in ["training", "validation"]:
+                timer = datetime.now()
+                log("Generating the {} set...".format(set_name), starting_time)
+
+                sample_rows = full_training_set[full_training_set.srch_id.isin(qids[set_name])]
+
+                pandas.set_option('mode.use_inf_as_null', True)
+
+                data_set_path = data_set_location + '/' + set_name
+
+                if missing_values_old_style:
+                    data_set = self.feature_engineering(sample_rows)
+                    self.OLD_store_data_frame_as_svm_light(data_set, data_set_path)
+                else:
+                    data_set = self.make_data_set(sample_rows, experiment_size)
+                    store_data_frame_as_svm_light(data_set, data_set_path)
+
+                if set_name == 'training':
+                    data_set.head(250).to_csv(data_set_location + '/example_data.csv')
+
+                log("Generated the {} set!".format(set_name), starting_time, timer)
+
+            log("All data generated.".format(minutes_passed(starting_time)), starting_time, data_generation_timer)
+
+        else:
+            log("Data set {} was already generated.".format(data_set_name), starting_time)
+
+        log("Through with the experiment.", starting_time)
+
+        run_identifier = 'run_{}_{}'.format(experiment_size, datetime.now().strftime('%Y%m%d%H%M%S'))
+
+        # Turn on logging.
+        logging.basicConfig(format='%(asctime)s : %(message)s', level=logging.INFO)
+
+        data_loading_timer = datetime.now()
+
+        # Load the data sets.
+        load_timer = datetime.now()
+        training_data = Queries.load_from_text(data_set_location + '/' + 'training')
+        log("Training queries loaded.".format(minutes_passed(starting_time)), starting_time, load_timer)
+
+        load_timer = datetime.now()
+        validation_data = Queries.load_from_text(data_set_location + '/' + 'validation')
+        log("Validation queries loaded.".format(minutes_passed(starting_time)), starting_time, load_timer)
+
+        log("ALL queries loaded.".format(minutes_passed(starting_time)), starting_time, data_loading_timer)
+
+        configuration = boosted_configuration()
+
+        model_fitting_timer = datetime.now()
+        model = make_model(configuration)
+        model.fit(training_data, validation_queries=validation_data)
+        validation_performance = model.best_performance[1][0]
+        log("Model fitted.", starting_time, model_fitting_timer)
+
+        logging.info('================================================================================')
+
+        output_timer = datetime.now()
+
+        output_folder = 'output/{}/{}/{}'.format(final_split_identifier, self.experiment_name, run_identifier)
+        if not os.path.exists(output_folder):
+            os.makedirs(output_folder)
+
+        model.save(output_folder + '/trained_model')
+
+        with open(output_folder + '/trained_model.pkl', 'wb') as secondstorage:
+            pickle.dump(model, secondstorage)
+
+        open(output_folder + '/nDCG_validation_{}'.format(str(validation_performance)), 'w+')
+
+        with open(output_folder + '/details.txt', "w+") as df:
+            df.write("Details of run {} of {} on the {} set.\n".format(run_identifier, self.experiment_name, experiment_size))
+            df.write("Experiment took {} minutes.\n".format(minutes_passed(starting_time)))
+            df.write("Using old missing values system: {}.\n".format(missing_values_old_style))
+            df.write("About {}: {}\n".format(self.experiment_name, self.experiment_description))
+            df.write("Used split: {}\n".format(final_split_identifier))
+            df.write("Result: nDCG {} on validation set after {} epochs.\n".format(validation_performance, model.n_estimators))
+
+            df.write("\nConfiguration (hyperparameters):\n")
+            df.write("{}\n".format(str(dict(configuration._asdict()))))
+
+        with open(output_folder + '/training_performance_per_epoch.txt', "w+") as tf:
+            tf.write(str(model.training_performance.tolist()))
+
+        with open(output_folder + '/validation_performance_per_epoch.txt', "w+") as vf:
+            vf.write(str(model.validation_performance.tolist()))
+
+        copyfile(data_set_location + '/example_data.csv', output_folder + '/example_data.csv')
+
+        log("All output done!", starting_time, output_timer)
