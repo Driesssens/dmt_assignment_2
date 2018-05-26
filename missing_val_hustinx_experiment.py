@@ -5,11 +5,11 @@ from sklearn import preprocessing
 import datetime
 import pandas as pd
 
-class HustinxExperimentE20(AbstractIzedExperiment):
+class MissingValHustinxExperiment3(AbstractIzedExperiment):
     split_identifier = "spl_20180518114037"
 
-    experiment_name = "HustinxExperimentE20"
-    experiment_description = """Experiment that uses the hour of the day that a search is done (note, this doesnt include time zone). Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values."""
+    experiment_name = "MissingValHustinxExperiment3"
+    experiment_description = """Experiment that uses the same parameters as HustinxExperimentE15. But uses what I assume are ideal values for the missing values."""
 
     ignored_features = ['date_time', 'gross_booking_usd', 'booking_bool', 'click_bool', 'position',
         'orig_destination_distance', 'srch_saterday_night_bool', 'srch_children_count', 'srch_adults_count', 'visitor_location_country_id',
@@ -38,11 +38,12 @@ class HustinxExperimentE20(AbstractIzedExperiment):
         'comp7_rate', 'comp7_inv', 'comp7_rate_percent_diff',
         'comp8_rate', 'comp8_inv', 'comp8_rate_percent_diff']
     
-        if(feature_name == 'prop_review_score' or 
-        feature_name == 'prop_location_score1' or
-        feature_name == 'prop_location_score2' or 
-        feature_name == 'srch_query_affinity_score'):
+        if(feature_name == 'prop_review_score'):
             feature_value = '1.000000'
+        elif(feature_name == 'prop_location_score2'):
+            feature_value = '0.300000'
+        elif(feature_name == 'srch_query_affinity_score'):
+            feature_value = '0.000000'
         elif(feature_name in comps):
             feature_value = '0.000000'
         else:
@@ -64,11 +65,11 @@ class HustinxExperimentE20(AbstractIzedExperiment):
                 'comp7_rate', 'comp7_inv', 'comp7_rate_percent_diff',
                 'comp8_rate', 'comp8_inv', 'comp8_rate_percent_diff']
                 
-        ## mean/median/std features per prop_id
-        for feature in num_features_prop:
-            df[feature+'_mean'] = df.groupby('prop_id')[feature].transform('mean')
-            df[feature+'_median'] = df.groupby('prop_id')[feature].transform('median')
-            df[feature+'_std'] = df.groupby('prop_id')[feature].transform('std')     
+        # # mean/median/std features per prop_id
+        # for feature in num_features_prop:
+            # df[feature+'_mean'] = df.groupby('prop_id')[feature].transform('mean')
+            # df[feature+'_median'] = df.groupby('prop_id')[feature].transform('median')
+            # df[feature+'_std'] = df.groupby('prop_id')[feature].transform('std')     
         
         # df_dates = df['date_time']
         # df_dates = df_dates.apply(lambda date: datetime.datetime.strptime(date, "%Y-%m-%d %H:%M:%S"))
@@ -104,8 +105,8 @@ class HustinxExperimentE20(AbstractIzedExperiment):
         # df['booking_month'] = (df_dates + df_book).apply(lambda dt: dt.month)
         
         ## Round prop location scores
-        df['prop_location_score1'] = (df['prop_location_score1']*10).round()/10
-        df['prop_location_score2'] = (df['prop_location_score2']*10).round()/10
+        #df['prop_location_score1'] = (df['prop_location_score1']*10).round()/10
+        #df['prop_location_score2'] = (df['prop_location_score2']*10).round()/10
         
         return AbstractIzedExperiment.add_normalized_attributes(self, df, self.grouped_attributes)
 
@@ -142,7 +143,7 @@ class HustinxExperimentE20(AbstractIzedExperiment):
         return df
 
 #HustinxExperimentE2().run_mini_experiment(reset_data=True)
-HustinxExperimentE20().run_full_experiment(reset_data=True)
+MissingValHustinxExperiment3().run_full_experiment(reset_data=True)
 
 #short_experiment = make_configuration(epochs=10)
 #HustinxExperimentE().run_development_experiment(configuration=short_experiment)
