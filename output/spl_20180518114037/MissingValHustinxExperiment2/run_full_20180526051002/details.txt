@@ -1,0 +1,9 @@
+Details of run run_full_20180526051002 of MissingValHustinxExperiment2 on the full set.
+Experiment took 426.2329 minutes.
+About MissingValHustinxExperiment2: Experiment that uses the same parameters as HustinxExperimentE15. But uses what I assume are ideal values for the missing values.
+Used split: spl_20180518114037
+Result: nDCG 0.511877431526 on test set after 816 epochs.
+Result: nDCG 0.512201622744 on validation set.
+
+Configuration (hyperparameters):
+{'estopping': 50, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 1000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 7, 'min_samples_split': 2, 'max_depth': None}
