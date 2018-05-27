@@ -1,6 +1,6 @@
 from abstract_experiment import AbstractExperiment
 from configuration import make_configuration
-
+from deployment_experiment import DeploymentExperiment
 
 def add_normalized_attributes(df, groups, attributes):
     for group in groups:
@@ -28,7 +28,7 @@ def add_standardized_attributes(df, groups, attributes):
     return df
 
 
-class AbstractIzedExperiment(AbstractExperiment):
+class AbstractIzedExperiment(DeploymentExperiment):
     normalization_method = "the hotel with the highest value for that attribute gets an additional feature with {method} value 1, the lowest a new feature with value 0, and the others in between"
 
     standardization_method = "it gets an additional feature that is divided by the standard variation after the mean is subtracted"

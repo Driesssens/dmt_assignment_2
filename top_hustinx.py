@@ -141,6 +141,11 @@ class HustinxExperimentTop(AbstractIzedExperiment):
         df['hour'] = hours
         return df
 
+# BaseExperiment().run_mini_experiment()
+# if no run Identifier is given the model will automatically take the last generated model from the location of the experiment name.
+
+HustinxExperimentTop().run_deployment(training_CHECK=True, run_identifier=None, reset_data=False, relevance_score_testing=True)
+
 #HustinxExperimentE2().run_mini_experiment(reset_data=True)
 # HustinxExperimentTop().run_medium_experiment(reset_data=True, missing_values_old_style=True)
 

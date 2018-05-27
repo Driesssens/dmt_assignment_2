@@ -1,12 +1,12 @@
 from abstract_ized_experiment import AbstractIzedExperiment
 from configuration import make_configuration
-
+from deployment_experiment import DeploymentExperiment
 # own imports
 import numpy
 
 
 class DeGroot2Experiment(AbstractIzedExperiment):
-    split_identifier = "spl_20180518114037"
+    split_identifier = "spl_final_20180526151122"
 
     experiment_name = "full_data_standardized_missing_values"
     grouped_attributes = ["srch_id"]
@@ -59,3 +59,7 @@ class DeGroot2Experiment(AbstractIzedExperiment):
 
         return raw_data_frame
 
+# BaseExperiment().run_mini_experiment()
+# if no run Identifier is given the model will automatically take the last generated model from the location of the experiment name.
+
+DeGroot2Experiment().run_deployment(training_CHECK=True, run_identifier=None, reset_data=False, relevance_score_testing=True)

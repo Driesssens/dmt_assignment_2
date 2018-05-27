@@ -173,6 +173,8 @@ class DeploymentExperiment(AbstractExperiment):
         logging.info('================================================================================')
         log("TEST START", starting_time)
 
+        self.experiment_name += "final"
+        print(self.experiment_name)
 
         ## Setting the locations of the data and name
 
@@ -181,11 +183,10 @@ class DeploymentExperiment(AbstractExperiment):
 
 
         # Check if the model has a second set that can be used to validate if the model works and if the model shows the correct results.
-        if training_CHECK:
-            data_valid_location = 'data/training_set_VU_DM_2014.csv'
-            store_svm_light_loc_valid = "data/{}/{}/{}/".format(self.split_identifier, self.experiment_name, experiment_size)
-            valid_test_set_name = "test"
+        data_valid_location = 'data/training_set_VU_DM_2014.csv'
+        valid_test_set_name = "test"
 
+        store_svm_light_loc_valid = "data/{}/{}/{}/".format(self.split_identifier, self.experiment_name, experiment_size)
         
         # Using the model indentifier to locate the model that is used to run the model.
         identifier = 0

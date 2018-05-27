@@ -2,9 +2,10 @@ from abstract_experiment import AbstractExperiment
 from abstract_ized_experiment import AbstractIzedExperiment, add_standardized_attributes
 import numpy as np
 from datetime import datetime
+from deployment_experiment import DeploymentExperiment
 
 
-class SuperExperiment(AbstractExperiment):
+class SuperExperiment(DeploymentExperiment):
     split_identifier = "spl_20180518114037"
 
     experiment_name = "SuperExperiment"
@@ -54,3 +55,9 @@ class SuperExperiment(AbstractExperiment):
         standardized_df = add_standardized_attributes(raw_data_frame, ['srch_id'], existing_features + new_features)
 
         return standardized_df
+
+
+# BaseExperiment().run_mini_experiment()
+# if no run Identifier is given the model will automatically take the last generated model from the location of the experiment name.
+
+SuperExperiment().run_deployment(training_CHECK=False, run_identifier=None, reset_data=False, relevance_score_testing=True)
