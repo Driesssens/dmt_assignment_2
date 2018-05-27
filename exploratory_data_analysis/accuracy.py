@@ -72,3 +72,20 @@ def plot_box():
 	plt.clf()
 
 def missin_Val():
+	full_training_set = pandas.read_csv('../data/training_set_VU_DM_2014.csv')
+	print("Dataset loaded")
+	plt.figure();
+	percentage = full_training_set.isnull().sum()/len(full_training_set)
+	percentage2 = percentage.sort_values().to_frame()
+
+	percentage2.columns = ["percentage missing"]
+	percentage2["Feature"] = percentage2.index
+	percentage2.plot.bar(x='Feature', color='k',width=0.9)
+	plt.ylabel("percentage missing")
+	plt.title("Missing data")
+	plt.tight_layout()
+	plt.legend().set_visible(False)
+	plt.show()
+	plt.savefig('missing_values.png', bbox_inches='tight')
+
+	plt.clf()
