@@ -47,6 +47,22 @@ plt.show()
 plt.savefig('output/acc_plot.png', bbox_inches='tight')
 plt.clf()
 
+f, axarr = plt.subplots(4, 15)
+i = 0
+j = 0
+for elem in list(full_training_set):
+    if elem == "date_time":
+        continue
+    full_training_set.boxplot(column=elem,grid=False, ax=axarr[j,i], rot=90, fontsize=8)
+    i+= 1
+    if i == 15:
+        i = 0
+        j += 1
+
+plt.show()
+plt.savefig('boxplot.png', bbox_inches='tight')
+plt.clf()
+
 # # summarize history for loss
 # plt.plot(history.history['loss'])
 # plt.plot(history.history['val_loss'])
