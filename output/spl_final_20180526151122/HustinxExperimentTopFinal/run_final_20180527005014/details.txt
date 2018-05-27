@@ -1,0 +1,9 @@
+Details of run run_final_20180527005014 of HustinxExperimentTopFinal on the final set.
+Experiment took 862.377033333 minutes.
+Using old missing values system: True.
+About HustinxExperimentTopFinal: Experiment that uses the hour of the day that a search is done (note, this doesnt include time zone). Ignores 'date_time', includes all other raw features without doing any preprocessing. Uses 0.000 for missing values.
+Used split: spl_final_20180526151122
+Result: nDCG 0.511961138284 on validation set after 1688 epochs.
+
+Configuration (hyperparameters):
+{'estopping': 200, 'use_ada_boost': False, 'use_logit_boost': False, 'shrinkage': 0.1, 'min_samples_leaf': 50, 'epochs': 2000, 'max_features': None, 'use_newton_method': True, 'max_leaf_nodes': 20, 'min_samples_split': 2, 'max_depth': None}
