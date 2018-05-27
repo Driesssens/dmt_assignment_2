@@ -126,12 +126,9 @@ def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=
 
         model_fitting_timer = datetime.now()
         model = make_model(configuration)
-        try:
-            model.fit(training_data, validation_queries=validation_data)
-            test_set_performance = model.evaluate(test_data, n_jobs=-1)
-        except:
-            test_set_performance = 0
-            pass
+        model.fit(training_data, validation_queries=validation_data)
+        test_set_performance = model.evaluate(test_data, n_jobs=-1)
+
         if verbose: log("{} | Model fitted.".format(feature), starting_time, model_fitting_timer)
 
         performance_testing_timer = datetime.now()
@@ -198,15 +195,11 @@ def test_univariate_ndcg_super():
     now = datetime.now()
     log("Starting.", now)
     ndcgs = []
-    data = SuperExperiment().make_data_set(pandas.read_csv('data/training_set_VU_DM_2014.csv'))
+    data = SuperExperiment().make_data_set(pandas.read_csv('data/training_set_VU_DM_2014.csv'))['prop_location_score|srch_id_standardized']
     with open("temp/temp_info_performance.txt", "r+") as fn:
     for line in fn.readlines():
         i += 1
         ndcgs.append(float(line.split("line")[-1].split("\n")[0]))
-    print(ndcgs)
-    columns = data_frame.columns.values
-    print(columns)
-    features = [column for column in columns if column not in NON_FEATURE_COLUMNS]
     features, ndcgs = compute_univariate_ndcg(data, verbose=True, size=MEDIUM, starting_time=now, save_to_file=True, file_name="super_experiment_single_feature_ndcg", message="Uses SuperExperiment to test all features.")
 
 test_univariate_ndcg_super()
