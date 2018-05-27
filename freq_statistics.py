@@ -107,7 +107,7 @@ rects1 = ax.bar(ind, click, width, color='b')
 
 # add some text for labels, title and axes ticks
 ax.set_ylabel('% clicked')
-ax.set_title('Amount clicked per position')
+ax.set_xlabel('Position')
 #ax.set_xticks(ind + width / 2)
 ax.set_xticklabels((0,0,5,10,15,20,25,30,35,40))
 
@@ -130,6 +130,7 @@ rects2 = ax.bar(ind + width, click, width, color='y')
 
 # add some text for labels, title and axes ticks
 ax.set_ylabel('Percentage')
+ax.set_ylabel('Clicked')
 ax.set_title('Occurrence of rounded prop_location_score2')
 ax.set_xticks(ind + width / 2)
 ax.set_xticklabels((0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0))
@@ -153,6 +154,7 @@ rects2 = ax.bar(ind + width, miss, width, color='r')
 
 # add some text for labels, title and axes ticks
 ax.set_ylabel('Percentage')
+ax.set_ylabel('Clicked')
 ax.set_title('Occurrence prop_location_score2')
 ax.set_xticks(ind + width / 2)
 ax.set_xticklabels(('All data', 'Booked', 'Clicked'))

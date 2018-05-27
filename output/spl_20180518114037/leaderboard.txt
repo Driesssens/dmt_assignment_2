@@ -86,6 +86,7 @@ full
    [17]. 0.507497 SrchIdNormalizedExperiment                                                run_full_20180521173932
    [18]. 0.504460 UserHistoryExperiment                                                     run_full_20180520004935
    [19]. 0.504063 BaseExperiment                                                            run_full_20180521120423
-   [20]. 0.504044 BaseExperiment                                                            run_full_20180518220530
-   [21]. 0.503938 deGrootonlymissingExperiment                                              run_full_20180522020608
+   [20]. 0.504063 BaseExperiment                                                            run_full_20180527172118
+   [21]. 0.504044 BaseExperiment                                                            run_full_20180518220530
+   [22]. 0.503938 deGrootonlymissingExperiment                                              run_full_20180522020608
 

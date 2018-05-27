@@ -68,7 +68,7 @@ def compute_univariate_correlation(data_frame, target, save_to_file=False, file_
     return features, correlations
 
 
-def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=FULL, save_to_file=False, file_name="", message="", ):
+def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=DEVELOPMENT, save_to_file=False, file_name="", message="", ):
     split_identifier = "spl_20180518114037"
 
     if starting_time is None:
@@ -84,14 +84,9 @@ def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=
 
     temporary_files_location = "temp/{}/".format(computation_identifier)
     os.makedirs(temporary_files_location)
-    i = 0
-    with open("temp/temp_info_performance.txt", "r+") as fn:
-        for line in fn.readlines():
-            i += 1
-            ndcgs.append(float(line.split("line")[-1].split("\n")[0]))
-    for feature in features[i+1:]:
-        feature = feature.replace("|", "_")
 
+    for feature in features:
+        feature = feature.replace("|","_")
         feature_starting_time = datetime.now()
         log("Starting feature '{}'...".format(feature), starting_time)
 
@@ -102,7 +97,7 @@ def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=
 
             if verbose: log("{} | Generating the {} set...".format(feature, set_name), starting_time)
 
-            with open('splits/{}/{}/{}_qids.pkl'.format(split_identifier, size, set_name), 'rb') as fp:
+            with open('../splits/{}/{}/{}_qids.pkl'.format(split_identifier, size, set_name), 'rU') as fp:
                 qids = pickle.load(fp)
 
             sample_rows = feature_data_frame[feature_data_frame.srch_id.isin(qids)]
@@ -125,21 +120,18 @@ def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=
         configuration = standard_configuration()
 
         model_fitting_timer = datetime.now()
-        model = make_model(configuration)
-        model.fit(training_data, validation_queries=validation_data)
-        test_set_performance = model.evaluate(test_data, n_jobs=-1)
+        try:
+            model = make_model(configuration)
+            model.fit(training_data, validation_queries=validation_data)
+            if verbose: log("{} | Model fitted.".format(feature), starting_time, model_fitting_timer)
 
-        if verbose: log("{} | Model fitted.".format(feature), starting_time, model_fitting_timer)
-
-        performance_testing_timer = datetime.now()
+            performance_testing_timer = datetime.now()
+            test_set_performance = model.evaluate(test_data, n_jobs=-1)
+        except:
+            test_set_performance = 0
 
         if verbose: log("{} | Performance tested.".format(feature), starting_time, performance_testing_timer)
         ndcgs.append(test_set_performance)
-        with open("temp/temp_info_performance.txt", "w+") as fn:
-            for item in ndcgs:
-                fn.write("line")
-                fn.write("%s\n" % item)
-
         log("Finished feature '{}'!".format(feature), starting_time, feature_starting_time)
 
     if save_to_file:
@@ -158,7 +150,6 @@ def compute_univariate_ndcg(data_frame, verbose=False, starting_time=None, size=
             df.write("\n")
 
             for i, feature in enumerate(features):
-                feature = feature.replace("|", "_")
                 df.write("{}: {}\n".format(feature, ndcgs[i]))
 
             df.write("\n")
@@ -194,12 +185,7 @@ def test_comp_dingen():
 def test_univariate_ndcg_super():
     now = datetime.now()
     log("Starting.", now)
-    ndcgs = []
-    data = SuperExperiment().make_data_set(pandas.read_csv('data/training_set_VU_DM_2014.csv'))['prop_location_score|srch_id_standardized']
-    with open("temp/temp_info_performance.txt", "r+") as fn:
-    for line in fn.readlines():
-        i += 1
-        ndcgs.append(float(line.split("line")[-1].split("\n")[0]))
+    data = SuperExperiment().make_data_set(pandas.read_csv('../data/training_set_VU_DM_2014.csv'))
     features, ndcgs = compute_univariate_ndcg(data, verbose=True, size=MEDIUM, starting_time=now, save_to_file=True, file_name="super_experiment_single_feature_ndcg", message="Uses SuperExperiment to test all features.")
 
 test_univariate_ndcg_super()
