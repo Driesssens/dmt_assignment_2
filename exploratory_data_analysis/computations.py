@@ -1,21 +1,17 @@
 from abstract_experiment import NON_FEATURE_COLUMNS, MINI, DEVELOPMENT, MEDIUM, FULL, log, store_data_frame_as_svm_light
-from datetime import datetime
 import pickle
 import logging
 import pandas
 from rankpy.queries import Queries
-from rankpy.models import LambdaMART
 from datetime import datetime
 from configuration import standard_configuration
 from configuration import make_model
 import os
 import shutil
-from one_feature_experiment import OneFeatureExperiment
 from date_time_as_number_experiment import DateTimeAsNumberExperiment
-from aggregated_competitors_experiment import AggregatedCompetitorsExperiment
 from plots import plot_correlations
-from user_history_normalized_experiment import UserHistoryNormalizedExperiment
 from ctr_cvr_srch_id_standardized_experiment import CtrCvrSrchIdStandardizedExperiment
+from super_experiment import SuperExperiment
 
 
 def compute_univariate_correlation_booking_bool(data_frame, save_to_file=False, file_name="", message=""):
@@ -35,7 +31,7 @@ def compute_univariate_correlation(data_frame, target, save_to_file=False, file_
 
     print correlations
 
-    correlations, features = (list(t) for t in zip(*sorted(zip(correlations, features), key=lambda tup: abs(tup[0]), reverse=True)))
+    sorted_correlations, sorted_features = (list(t) for t in zip(*sorted(zip(correlations, features), key=lambda tup: abs(tup[0]), reverse=True)))
 
     print correlations
 
@@ -56,8 +52,8 @@ def compute_univariate_correlation(data_frame, target, save_to_file=False, file_
 
             df.write("\n")
 
-            for i, feature in enumerate(features):
-                df.write("{}: {}\n".format(feature, correlations[i]))
+            for i, feature in enumerate(sorted_features):
+                df.write("{}: {}\n".format(feature, sorted_correlations[i]))
 
             df.write("\n")
 
@@ -168,8 +164,10 @@ def test_univariate_ndcg():
 
 
 def test_correlation():
-    data = DateTimeAsNumberExperiment().make_data_set(pandas.read_csv('../data/training_set_VU_DM_2014.csv'))
-    features, correlations = compute_univariate_correlation_booking_bool(data, save_to_file=True, file_name="correlations_of_raw_data_set", message="Uses DateTimeAsNumberExperiment to check correlation of all features.")
+    original_features = ['site_id', 'visitor_location_country_id', 'visitor_hist_starrating', 'visitor_hist_adr_usd', 'prop_country_id', 'prop_id', 'prop_starrating', 'prop_review_score', 'prop_brand_bool', 'prop_location_score1', 'prop_location_score2', 'prop_log_historical_price', 'price_usd', 'promotion_flag', 'srch_destination_id', 'srch_length_of_stay', 'srch_booking_window', 'srch_adults_count', 'srch_children_count', 'srch_room_count', 'srch_saturday_night_bool', 'srch_query_affinity_score', 'orig_destination_distance', 'random_bool', 'comp1_rate', 'comp1_inv', 'comp1_rate_percent_diff', 'comp2_rate', 'comp2_inv', 'comp2_rate_percent_diff', 'comp3_rate', 'comp3_inv', 'comp3_rate_percent_diff', 'comp4_rate', 'comp4_inv', 'comp4_rate_percent_diff', 'comp5_rate', 'comp5_inv', 'comp5_rate_percent_diff', 'comp6_rate', 'comp6_inv', 'comp6_rate_percent_diff', 'comp7_rate', 'comp7_inv', 'comp7_rate_percent_diff', 'comp8_rate', 'comp8_inv', 'comp8_rate_percent_diff']
+
+    data = SuperExperiment().make_data_set(pandas.read_csv('../data/training_set_VU_DM_2014.csv')).drop(original_features, axis=1)
+    features, correlations = compute_univariate_correlation_booking_bool(data, save_to_file=True, file_name="correlations_SuperExperiment", message="Uses SuperExperiment to check correlation of all features except the original features.")
 
 
 def test_comp_dingen():
@@ -178,4 +176,4 @@ def test_comp_dingen():
     plot_correlations(features, correlations, vertical=False)
 
 
-test_comp_dingen()
+test_correlation()

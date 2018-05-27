@@ -1,0 +1,8 @@
+Largest correlation: 0.0726355641977 / 0.0888910563926
+Smallest correlation: 0 / 0
+
+Largest nDCG:0.436588428023 / 0.43531325925752007
+Smallest nDCG: 0 or 0.353265198853 / 0.35351173337718367
+
+So: correlation range from 0 to 0.09
+nDCG range from 0.35 to 0.44

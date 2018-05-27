@@ -1,0 +1,38 @@
+Message: Uses SuperExperiment to check correlation of all features except the original features.
+Largest correlation: 0.0726355641977
+Smallest correlation: 2.60513662258e-05
+Average absolute correlation: 0.0135389623549
+
+prop_location_score2|srch_id_standardized: 0.0726355641977
+price_usd|srch_id_standardized: -0.0418212485291
+srch_query_affinity_score|srch_id_standardized: 0.0389115768564
+prop_starrating|srch_id_standardized: 0.0378618423551
+prop_review_score|srch_id_standardized: 0.0247838106993
+comp_rate|sum|positive: 0.0192337242368
+prop_location_score1|srch_id_standardized: 0.0187860656605
+comp_rate|sum: 0.0187330195182
+comp_rate|sum|srch_id_standardized: 0.0183624429573
+comp_rate|sum|positive|srch_id_standardized: 0.0168719115294
+price_usd|personal_difference|srch_id_standardized: -0.0161910176185
+prop_starrating|personal_difference|srch_id_standardized: -0.0126023637087
+prop_log_historical_price|srch_id_standardized: 0.0119696953167
+comp_rate|sum|negative|srch_id_standardized: 0.0105148197196
+comp_rate|sum|negative: 0.00749578518154
+comp7_rate_percent_diff|signed: 0.00292113479555
+season: 0.00238834409105
+comp6_rate_percent_diff|signed: 0.00237507116925
+day_part: -0.0016218023673
+comp2_rate_percent_diff|signed: 0.00111563479936
+orig_destination_distance|srch_id_standardized: -0.000787547220643
+prop_starrating|personal_difference: 0.000614197319246
+comp1_rate_percent_diff|signed: -0.000202901250061
+comp8_rate_percent_diff|signed: 0.00014526030157
+comp4_rate_percent_diff|signed: 4.3380999114e-05
+comp3_rate_percent_diff|signed: 4.12796707641e-05
+comp5_rate_percent_diff|signed: 3.34525017295e-05
+price_usd|personal_difference: 2.60513662258e-05
+
+Feature list: ['comp1_rate_percent_diff|signed', 'comp2_rate_percent_diff|signed', 'comp3_rate_percent_diff|signed', 'comp4_rate_percent_diff|signed', 'comp5_rate_percent_diff|signed', 'comp6_rate_percent_diff|signed', 'comp7_rate_percent_diff|signed', 'comp8_rate_percent_diff|signed', 'comp_rate|sum', 'comp_rate|sum|positive', 'comp_rate|sum|negative', 'prop_starrating|personal_difference', 'price_usd|personal_difference', 'day_part', 'season', 'prop_starrating|srch_id_standardized', 'prop_review_score|srch_id_standardized', 'prop_location_score1|srch_id_standardized', 'prop_location_score2|srch_id_standardized', 'prop_log_historical_price|srch_id_standardized', 'price_usd|srch_id_standardized', 'srch_query_affinity_score|srch_id_standardized', 'orig_destination_distance|srch_id_standardized', 'comp_rate|sum|srch_id_standardized', 'comp_rate|sum|positive|srch_id_standardized', 'comp_rate|sum|negative|srch_id_standardized', 'prop_starrating|personal_difference|srch_id_standardized', 'price_usd|personal_difference|srch_id_standardized']
+
+Correlations list: [-0.00020290125006133038, 0.0011156347993593226, 4.1279670764112543e-05, 4.338099911402048e-05, 3.3452501729467344e-05, 0.0023750711692517193, 0.0029211347955481032, 0.00014526030157029792, 0.01873301951823676, 0.019233724236803598, 0.007495785181535264, 0.0006141973192462382, 2.6051366225824547e-05, -0.0016218023673024906, 0.0023883440910522987, 0.03786184235514443, 0.024783810699319706, 0.01878606566054998, 0.07263556419772177, 0.01196969531669563, -0.04182124852909668, 0.03891157685641361, -0.0007875472206431265, 0.018362442957342406, 0.01687191152937256, 0.010514819719603354, -0.012602363708693158, -0.01619101761847791]
+
